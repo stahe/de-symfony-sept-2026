@@ -1,0 +1,1538 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Schritt-für-Schritt-Einführung in das Web-Framework [Symfony]">
+      
+      
+        <meta name="author" content="Serge Tahé">
+      
+      
+        <link rel="canonical" href="https://stahe.github.io/de-symfony-sept-2026/der-lebenszyklus-einer-anfrage.html">
+      
+      
+        <link rel="prev" href="gultigkeitsbereiche-von-daten.html">
+      
+      
+        <link rel="next" href="authentifizierung-und-autorisierung.html">
+      
+      
+        
+      
+      
+      <link rel="icon" href="assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>7. Der Lebenszyklus einer Anfrage - Schritt-für-Schritt-Einführung in das Web-Framework [Symfony]</title>
+      
+    
+    
+      <link rel="stylesheet" href="assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="stylesheets/focus.css">
+    
+      <link rel="stylesheet" href="stylesheets/bidi.css">
+    
+    <script>__md_scope=new URL(".",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-EBZC3JVJNR"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    var siteName = "Schritt-für-Schritt-Einführung in das Web-Framework [Symfony]";
+    gtag('config', 'G-EBZC3JVJNR', {
+        'page_title': siteName
+    });
+  </script>
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="purple">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#7-der-lebenszyklus-einer-anfrage" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="index.html" title="Schritt-für-Schritt-Einführung in das Web-Framework [Symfony]" class="md-header__button md-logo" aria-label="Schritt-für-Schritt-Einführung in das Web-Framework [Symfony]" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Schritt-für-Schritt-Einführung in das Web-Framework [Symfony]
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              7. Der Lebenszyklus einer Anfrage
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="purple"  aria-label="Zum dunklen Modus wechseln"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Zum dunklen Modus wechseln" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="blue" data-md-color-accent="purple"  aria-label="Zum hellen Modus wechseln"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Zum hellen Modus wechseln" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://stahe.github.io/de-symfony-sept-2026" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="index.html" title="Schritt-für-Schritt-Einführung in das Web-Framework [Symfony]" class="md-nav__button md-logo" aria-label="Schritt-für-Schritt-Einführung in das Web-Framework [Symfony]" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Schritt-für-Schritt-Einführung in das Web-Framework [Symfony]
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://stahe.github.io/de-symfony-sept-2026" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="index.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Willkommen
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="einfuhrung.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1. Einführung
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="actions-routing-antworten.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2. Actions, Routing, Antworten
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="das-action-modell.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    3. Das Action-Modell
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="die-view-und-ihr-modell.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    4. Die View und ihr Modell
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="internationalisierung.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    5. Internationalisierung
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="gultigkeitsbereiche-von-daten.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    6. Gültigkeitsbereiche von Daten
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    7. Der Lebenszyklus einer Anfrage
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="der-lebenszyklus-einer-anfrage.html" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    7. Der Lebenszyklus einer Anfrage
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#71-beispiel-24-die-phasen-der-anfrageverarbeitung" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.1. Beispiel 24: Die Phasen der Anfrageverarbeitung
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7.1. Beispiel 24: Die Phasen der Anfrageverarbeitung">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#711-vor-und-nach-allem-anderen-srceventlistenerloggerphp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.1.1. Vor und nach allem anderen: src/EventListener/Logger.php
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#712-nach-dem-routing-srceventlistenerblockphp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.1.2. Nach dem Routing: src/EventListener/Block.php
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#713-vor-der-aktion-srceventlistenertimedphp-und-timingphp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.1.3. Vor der Aktion: src/EventListener/Timed.php und Timing.php
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#714-die-argumente-der-aktion-srcbindingintegerresolverphp-und-der-controller" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.1.4. Die Argumente der Aktion: src/Binding/IntegerResolver.php und der Controller
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#715-fehlerbehandlung-srceventlistenererrorpagephp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.1.5. Fehlerbehandlung: src/EventListener/ErrorPage.php
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#716-ausfuhrung" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.1.6. Ausführung
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="authentifizierung-und-autorisierung.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    8. Authentifizierung und Autorisierung
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="schichtenarchitektur-und-datenzugriff.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    9. Schichtenarchitektur und Datenzugriff
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="zwischenfazit.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    10. Zwischenfazit
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="fallstudie-die-anwendung-rdvmedecins.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    11. Fallstudie: Die Anwendung RdvMedecins
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="fazit.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    12. Fazit
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="anhange.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    13. Anhänge
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="7-der-lebenszyklus-einer-anfrage">7. <span style="color: #2e74b5">Der Lebenszyklus einer Anfrage</span></h1>
+<p>Zwischen dem Eintreffen einer Anfrage und dem Versand ihrer Antwort führt der <em>[Symfony]</em>-Kernel (die Klasse <strong><em>[HttpKernel]</em></strong>) mehrere Schritte aus, und bei jedem Schritt <strong>veröffentlicht er ein Ereignis</strong> , auf das die Anwendung über einen Listener reagieren kann. Einigen davon sind wir bereits begegnet: den Listenern für <strong><em>[kernel.request]</em></strong> und <strong><em>[kernel.response]</em></strong> (Beispiele 03, 16, 22), für <strong><em>[kernel.exception]</em></strong> (Beispiele 08 und 12) und den Argument-Resolvern (Beispiel 12). Dieses Kapitel führt sie alle in einem einzigen Beispiel zusammen, das bei jedem Schritt eine Meldung in der Konsole ausgibt, damit Sie die Reihenfolge beobachten können:</p>
+<ul>
+<li><strong>1 und 2.</strong> <strong><em>[kernel.request]</em></strong>: Die Anfrage ist gerade eingetroffen. Alle Listener für dieses Ereignis werden in absteigender Reihenfolge ihrer Priorität aufgerufen. Einer davon ist der <strong>Routing-Listener</strong> von <em>[Symfony]</em> (der Listener <strong><em>[RouterListener]</em></strong> mit Priorität 32): Er sucht die Route, die zur URL und zur Methode passt, und speichert ihren Namen und ihre Parameter in den Anfrageattributen; passt keine, wirft er eine <strong><em>[NotFoundHttpException]</em></strong> (404) aus. Ein Listener mit einer Priorität über 32 (<strong>1</strong>) läuft vor dem Routing und kennt die Route nicht; ein Listener mit niedrigerer Priorität (<strong>2</strong>) kennt sie. Ein <strong><em>[kernel.request]</em></strong>-Listener kann auch selbst die Antwort liefern (<strong><em>[$event-&gt;setResponse(...)]</em></strong>): In diesem Fall wird die Aktion nicht aufgerufen;</li>
+<li><strong>3.</strong> <strong><em>[kernel.controller]</em></strong>: Die Aktion wurde ausgewählt, aber noch nicht aufgerufen. Ein Listener kann die Aktion untersuchen (ihre Attribute, etwa die von <em>[PHP]</em>) oder sie ersetzen;</li>
+<li><strong>4. Die Argument-Resolver</strong> berechnen die Parameter der Aktion (Beispiel 12), anschließend wird das Ereignis <strong><em>[kernel.controller_arguments]</em></strong> veröffentlicht;</li>
+<li><strong>5. Die Aktion</strong> und die View, die sie erzeugt. (Gibt die Aktion kein <strong><em>[Response]</em></strong>-Objekt zurück, erlaubt ein zusätzliches Ereignis, <strong><em>[kernel.view]</em></strong>, einem Listener, die Antwort anhand dessen zu erstellen, was die Aktion zurückgegeben hat.);</li>
+<li><strong>6 und 7.</strong> <strong><em>[kernel.response]</em></strong>: Die Antwort ist fertig. Jeder Listener kann sie in absteigender Reihenfolge der Priorität ändern (einen Header, ein Cookie hinzufügen);</li>
+<li><strong>8.</strong> <strong><em>[kernel.terminate]</em></strong>, veröffentlicht <strong>nach dem Senden der Antwort</strong> an den Browser (das ist der <strong><em>[$kernel-&gt;terminate(...)]</em></strong>-Aufruf aus der Datei <strong><em>[public/index.php]</em></strong>, Beispiel 01). Listener können die Antwort nicht mehr ändern: Sie dienen für Aufgaben, die warten können (ein Log schreiben, eine E-Mail senden usw.), ohne den Benutzer warten zu lassen;</li>
+<li><strong>x.</strong> <strong><em>[kernel.exception]</em></strong>: Eine Exception, die in irgendeiner Phase geworfen wird (von einem Listener, einem Resolver, der Aktion oder der View), unterbricht die Verarbeitung; sie wird von den Listenern für dieses Ereignis behandelt. Der erste Listener, der eine Antwort liefert, beendet die Suche. Diese Antwort durchläuft dann <strong><em>[kernel.response]</em></strong>, genau wie eine normale Antwort. Liefert keiner der Listener der Anwendung eine, erzeugt <em>[Symfony]</em> die Fehlerseite: im Debug-Modus detailliert, sonst minimal.</li>
+</ul>
+<p>Das entspricht den Filtern in <em>[Java]</em> und den Interceptors in <em>[Spring MVC]</em>, den Action-Filtern in <em>[ASP.NET Core MVC]</em>, den Funktionen <strong><em>[before_request]</em></strong> / <strong><em>[after_request]</em></strong> von <em>[Flask]</em> und der Middleware von <em>[Laravel]</em>. Der Unterschied liegt in ihrer Struktur: Eine Middleware-Komponente <strong>umschließt</strong> die übrige Verarbeitung (sie ruft <strong><em>[$next]</em></strong> auf und sieht somit die Anfrage davor und die Antwort danach, im selben Code), während ein Listener auf <strong>ein</strong> Ereignis reagiert; um vor und nach der Aktion zu agieren, muss man zwei Ereignisse abonnieren. Dafür kann ein Listener in einer bestimmten Phase eingreifen (nach dem Routing, nach der Auswahl der Aktion usw.), und die Reihenfolge der Listener wird durch eine Zahl bestimmt – die Priorität.</p>
+<h2 id="71-beispiel-24-die-phasen-der-anfrageverarbeitung">7.1. <span style="color: #2e74b5">Beispiel 24: Die Phasen der Anfrageverarbeitung</span></h2>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-0-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-0-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-0-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-0-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-0-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-0-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-0-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-0-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-0-10">10</a></span>
+<span class="normal"><a href="#__codelineno-0-11">11</a></span>
+<span class="normal"><a href="#__codelineno-0-12">12</a></span>
+<span class="normal"><a href="#__codelineno-0-13">13</a></span>
+<span class="normal"><a href="#__codelineno-0-14">14</a></span>
+<span class="normal"><a href="#__codelineno-0-15">15</a></span>
+<span class="normal"><a href="#__codelineno-0-16">16</a></span>
+<span class="normal"><a href="#__codelineno-0-17">17</a></span>
+<span class="normal"><a href="#__codelineno-0-18">18</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1"></a>24-lifecycle/
+<a id="__codelineno-0-2" name="__codelineno-0-2"></a>├── src/
+<a id="__codelineno-0-3" name="__codelineno-0-3"></a>│   ├── Controller/
+<a id="__codelineno-0-4" name="__codelineno-0-4"></a>│   │   └── CalcController.php
+<a id="__codelineno-0-5" name="__codelineno-0-5"></a>│   ├── EventListener/
+<a id="__codelineno-0-6" name="__codelineno-0-6"></a>│   │   ├── Block.php
+<a id="__codelineno-0-7" name="__codelineno-0-7"></a>│   │   ├── Timing.php
+<a id="__codelineno-0-8" name="__codelineno-0-8"></a>│   │   ├── Timed.php
+<a id="__codelineno-0-9" name="__codelineno-0-9"></a>│   │   ├── Logger.php
+<a id="__codelineno-0-10" name="__codelineno-0-10"></a>│   │   └── ErrorPage.php
+<a id="__codelineno-0-11" name="__codelineno-0-11"></a>│   └── Binding/
+<a id="__codelineno-0-12" name="__codelineno-0-12"></a>│       └── IntegerResolver.php
+<a id="__codelineno-0-13" name="__codelineno-0-13"></a>├── templates/
+<a id="__codelineno-0-14" name="__codelineno-0-14"></a>│   ├── calc/
+<a id="__codelineno-0-15" name="__codelineno-0-15"></a>│   │   └── result.html.twig
+<a id="__codelineno-0-16" name="__codelineno-0-16"></a>│   ├── error.html.twig
+<a id="__codelineno-0-17" name="__codelineno-0-17"></a>│   └── layout.html.twig
+<a id="__codelineno-0-18" name="__codelineno-0-18"></a>└── ...
+</code></pre></div></td></tr></table></div>
+<p>Die Anwendung hat nur eine einzige Aktion, die das Quadrat einer ganzen Zahl berechnet: <strong><em>[/square/7]</em></strong>. Abhängig von der URL gelingt sie oder schlägt auf verschiedene Weise fehl. Die Meldungen werden von der Funktion <strong><em>[error_log]</em></strong> in <em>[PHP]</em> in die Server-Konsole geschrieben, die der Entwicklungsserver (<strong><em>[php -S]</em></strong>) anzeigt.</p>
+<h3 id="711-vor-und-nach-allem-anderen-srceventlistenerloggerphp">7.1.1. <span style="color: #1f4d78">Vor und nach allem anderen: src/EventListener/Logger.php</span></h3>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-1-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-1-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-1-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-1-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-1-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-1-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-1-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-1-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-1-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-1-10">10</a></span>
+<span class="normal"><a href="#__codelineno-1-11">11</a></span>
+<span class="normal"><a href="#__codelineno-1-12">12</a></span>
+<span class="normal"><a href="#__codelineno-1-13">13</a></span>
+<span class="normal"><a href="#__codelineno-1-14">14</a></span>
+<span class="normal"><a href="#__codelineno-1-15">15</a></span>
+<span class="normal"><a href="#__codelineno-1-16">16</a></span>
+<span class="normal"><a href="#__codelineno-1-17">17</a></span>
+<span class="normal"><a href="#__codelineno-1-18">18</a></span>
+<span class="normal"><a href="#__codelineno-1-19">19</a></span>
+<span class="normal"><a href="#__codelineno-1-20">20</a></span>
+<span class="normal"><a href="#__codelineno-1-21">21</a></span>
+<span class="normal"><a href="#__codelineno-1-22">22</a></span>
+<span class="normal"><a href="#__codelineno-1-23">23</a></span>
+<span class="normal"><a href="#__codelineno-1-24">24</a></span>
+<span class="normal"><a href="#__codelineno-1-25">25</a></span>
+<span class="normal"><a href="#__codelineno-1-26">26</a></span>
+<span class="normal"><a href="#__codelineno-1-27">27</a></span>
+<span class="normal"><a href="#__codelineno-1-28">28</a></span>
+<span class="normal"><a href="#__codelineno-1-29">29</a></span>
+<span class="normal"><a href="#__codelineno-1-30">30</a></span>
+<span class="normal"><a href="#__codelineno-1-31">31</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1"></a><span class="cp">&lt;?php</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2"></a><span class="c1">// src/EventListener/Logger.php: ein Listener für ZWEI Ereignisse. Er sieht jede Anfrage</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3"></a><span class="c1">// VOR dem Rest der Anwendung vorbeigehen (sogar vor dem Routing) und die Antwort</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4"></a><span class="c1">// NACH allem anderen</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5"></a>
+<a id="__codelineno-1-6" name="__codelineno-1-6"></a><span class="k">namespace</span> <span class="nx">App\EventListener</span><span class="p">;</span>
+<a id="__codelineno-1-7" name="__codelineno-1-7"></a>
+<a id="__codelineno-1-8" name="__codelineno-1-8"></a><span class="k">use</span> <span class="nx">Symfony\Component\EventDispatcher\Attribute\AsEventListener</span><span class="p">;</span>
+<a id="__codelineno-1-9" name="__codelineno-1-9"></a><span class="k">use</span> <span class="nx">Symfony\Component\HttpKernel\Event\RequestEvent</span><span class="p">;</span>
+<a id="__codelineno-1-10" name="__codelineno-1-10"></a><span class="k">use</span> <span class="nx">Symfony\Component\HttpKernel\Event\ResponseEvent</span><span class="p">;</span>
+<a id="__codelineno-1-11" name="__codelineno-1-11"></a><span class="k">use</span> <span class="nx">Symfony\Component\HttpKernel\KernelEvents</span><span class="p">;</span>
+<a id="__codelineno-1-12" name="__codelineno-1-12"></a>
+<a id="__codelineno-1-13" name="__codelineno-1-13"></a><span class="k">class</span> <span class="nc">Logger</span>
+<a id="__codelineno-1-14" name="__codelineno-1-14"></a><span class="p">{</span>
+<a id="__codelineno-1-15" name="__codelineno-1-15"></a>    <span class="c1">// Priorität 100: vor dem Routing von Symfony (Priorität 32)</span>
+<a id="__codelineno-1-16" name="__codelineno-1-16"></a>    <span class="p">#[</span><span class="nd">AsEventListener</span><span class="p">(</span><span class="nx">event</span><span class="o">:</span> <span class="nx">KernelEvents</span><span class="o">::</span><span class="na">REQUEST</span><span class="p">,</span> <span class="nx">priority</span><span class="o">:</span> <span class="mi">100</span><span class="p">)]</span>
+<a id="__codelineno-1-17" name="__codelineno-1-17"></a>    <span class="k">public</span> <span class="k">function</span> <span class="nf">before</span><span class="p">(</span><span class="nx">RequestEvent</span> <span class="nv">$event</span><span class="p">)</span><span class="o">:</span> <span class="nx">void</span>
+<a id="__codelineno-1-18" name="__codelineno-1-18"></a>    <span class="p">{</span>
+<a id="__codelineno-1-19" name="__codelineno-1-19"></a>        <span class="nv">$request</span> <span class="o">=</span> <span class="nv">$event</span><span class="o">-&gt;</span><span class="na">getRequest</span><span class="p">();</span>
+<a id="__codelineno-1-20" name="__codelineno-1-20"></a>        <span class="c1">// error_log: eine Meldung in der Konsole des Entwicklungsservers</span>
+<a id="__codelineno-1-21" name="__codelineno-1-21"></a>        <span class="nb">error_log</span><span class="p">(</span><span class="s1">'--- '</span><span class="o">.</span><span class="nv">$request</span><span class="o">-&gt;</span><span class="na">getMethod</span><span class="p">()</span><span class="o">.</span><span class="s1">' '</span><span class="o">.</span><span class="nv">$request</span><span class="o">-&gt;</span><span class="na">getRequestUri</span><span class="p">());</span>
+<a id="__codelineno-1-22" name="__codelineno-1-22"></a>        <span class="nb">error_log</span><span class="p">(</span><span class="s1">'1. Logger, kernel.request (before the routing)'</span><span class="p">);</span>
+<a id="__codelineno-1-23" name="__codelineno-1-23"></a>    <span class="p">}</span>
+<a id="__codelineno-1-24" name="__codelineno-1-24"></a>
+<a id="__codelineno-1-25" name="__codelineno-1-25"></a>    <span class="c1">// Priorität -100: nach den anderen Listenern von kernel.response</span>
+<a id="__codelineno-1-26" name="__codelineno-1-26"></a>    <span class="p">#[</span><span class="nd">AsEventListener</span><span class="p">(</span><span class="nx">event</span><span class="o">:</span> <span class="nx">KernelEvents</span><span class="o">::</span><span class="na">RESPONSE</span><span class="p">,</span> <span class="nx">priority</span><span class="o">:</span> <span class="o">-</span><span class="mi">100</span><span class="p">)]</span>
+<a id="__codelineno-1-27" name="__codelineno-1-27"></a>    <span class="k">public</span> <span class="k">function</span> <span class="nf">after</span><span class="p">(</span><span class="nx">ResponseEvent</span> <span class="nv">$event</span><span class="p">)</span><span class="o">:</span> <span class="nx">void</span>
+<a id="__codelineno-1-28" name="__codelineno-1-28"></a>    <span class="p">{</span>
+<a id="__codelineno-1-29" name="__codelineno-1-29"></a>        <span class="nb">error_log</span><span class="p">(</span><span class="s1">'7. Logger, kernel.response (code '</span><span class="o">.</span><span class="nv">$event</span><span class="o">-&gt;</span><span class="na">getResponse</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">getStatusCode</span><span class="p">()</span><span class="o">.</span><span class="s1">')'</span><span class="p">);</span>
+<a id="__codelineno-1-30" name="__codelineno-1-30"></a>    <span class="p">}</span>
+<a id="__codelineno-1-31" name="__codelineno-1-31"></a><span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+<p>Eine einzelne Klasse kann auf mehrere Ereignisse reagieren: Das Attribut <strong><em>[#[AsEventListener]]</em></strong> wird dann auf jede der betreffenden Methoden angewendet.</p>
+<ul>
+<li>Zeilen 16–23: Meldung Nr. 1 mit der Anfrage (<strong><em>[getRequestUri()]</em></strong>: der Pfad und die Parameter). Priorität 100 setzt den Listener vor das Routing: In <em>[Symfony]</em> ist noch nichts passiert;</li>
+<li>Zeilen 26–30: Meldung Nr. 7, nachdem alles andere abgeschlossen ist. Eine Priorität von -100 setzt den Listener hinter die der Anwendung und von <em>[Symfony]</em> (von denen die meisten eine Priorität zwischen -10 und 10 haben). <strong><em>[getStatusCode()]</em></strong> ist der Antwortcode.</li>
+</ul>
+<p>Ein solcher Listener kennt die gewählte Route nicht, da das Routing noch nicht stattgefunden hat. Er dient für Verarbeitungen, die für alle Anfragen gelten: Logging, Behandlung eines Proxys (die Fallstudie erwähnt das im Zusammenhang mit der IP-Adresse der Clients) ...</p>
+<h3 id="712-nach-dem-routing-srceventlistenerblockphp">7.1.2. <span style="color: #1f4d78">Nach dem Routing: src/EventListener/Block.php</span></h3>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-2-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-2-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-2-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-2-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-2-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-2-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-2-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-2-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-2-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-2-10">10</a></span>
+<span class="normal"><a href="#__codelineno-2-11">11</a></span>
+<span class="normal"><a href="#__codelineno-2-12">12</a></span>
+<span class="normal"><a href="#__codelineno-2-13">13</a></span>
+<span class="normal"><a href="#__codelineno-2-14">14</a></span>
+<span class="normal"><a href="#__codelineno-2-15">15</a></span>
+<span class="normal"><a href="#__codelineno-2-16">16</a></span>
+<span class="normal"><a href="#__codelineno-2-17">17</a></span>
+<span class="normal"><a href="#__codelineno-2-18">18</a></span>
+<span class="normal"><a href="#__codelineno-2-19">19</a></span>
+<span class="normal"><a href="#__codelineno-2-20">20</a></span>
+<span class="normal"><a href="#__codelineno-2-21">21</a></span>
+<span class="normal"><a href="#__codelineno-2-22">22</a></span>
+<span class="normal"><a href="#__codelineno-2-23">23</a></span>
+<span class="normal"><a href="#__codelineno-2-24">24</a></span>
+<span class="normal"><a href="#__codelineno-2-25">25</a></span>
+<span class="normal"><a href="#__codelineno-2-26">26</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1"></a><span class="cp">&lt;?php</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2"></a><span class="c1">// src/EventListener/Block.php: ein Listener von kernel.request, der NACH dem</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3"></a><span class="c1">// Routing ausgeführt wird: Er kennt die gewählte Route</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4"></a>
+<a id="__codelineno-2-5" name="__codelineno-2-5"></a><span class="k">namespace</span> <span class="nx">App\EventListener</span><span class="p">;</span>
+<a id="__codelineno-2-6" name="__codelineno-2-6"></a>
+<a id="__codelineno-2-7" name="__codelineno-2-7"></a><span class="k">use</span> <span class="nx">Symfony\Component\EventDispatcher\Attribute\AsEventListener</span><span class="p">;</span>
+<a id="__codelineno-2-8" name="__codelineno-2-8"></a><span class="k">use</span> <span class="nx">Symfony\Component\HttpKernel\Event\RequestEvent</span><span class="p">;</span>
+<a id="__codelineno-2-9" name="__codelineno-2-9"></a><span class="k">use</span> <span class="nx">Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException</span><span class="p">;</span>
+<a id="__codelineno-2-10" name="__codelineno-2-10"></a><span class="k">use</span> <span class="nx">Symfony\Component\HttpKernel\KernelEvents</span><span class="p">;</span>
+<a id="__codelineno-2-11" name="__codelineno-2-11"></a>
+<a id="__codelineno-2-12" name="__codelineno-2-12"></a><span class="c1">// Priorität 0 (Standard): nach dem Routing (Priorität 32)</span>
+<a id="__codelineno-2-13" name="__codelineno-2-13"></a><span class="p">#[</span><span class="nd">AsEventListener</span><span class="p">(</span><span class="nx">event</span><span class="o">:</span> <span class="nx">KernelEvents</span><span class="o">::</span><span class="na">REQUEST</span><span class="p">)]</span>
+<a id="__codelineno-2-14" name="__codelineno-2-14"></a><span class="k">class</span> <span class="nc">Block</span>
+<a id="__codelineno-2-15" name="__codelineno-2-15"></a><span class="p">{</span>
+<a id="__codelineno-2-16" name="__codelineno-2-16"></a>    <span class="k">public</span> <span class="k">function</span> <span class="fm">__invoke</span><span class="p">(</span><span class="nx">RequestEvent</span> <span class="nv">$event</span><span class="p">)</span><span class="o">:</span> <span class="nx">void</span>
+<a id="__codelineno-2-17" name="__codelineno-2-17"></a>    <span class="p">{</span>
+<a id="__codelineno-2-18" name="__codelineno-2-18"></a>        <span class="nv">$request</span> <span class="o">=</span> <span class="nv">$event</span><span class="o">-&gt;</span><span class="na">getRequest</span><span class="p">();</span>
+<a id="__codelineno-2-19" name="__codelineno-2-19"></a>        <span class="c1">// das Attribut _route der Anfrage: der Name der vom Routing gewählten Route</span>
+<a id="__codelineno-2-20" name="__codelineno-2-20"></a>        <span class="nb">error_log</span><span class="p">(</span><span class="s1">'2. Block, kernel.request (route: '</span><span class="o">.</span><span class="nv">$request</span><span class="o">-&gt;</span><span class="na">attributes</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">'_route'</span><span class="p">)</span><span class="o">.</span><span class="s1">')'</span><span class="p">);</span>
+<a id="__codelineno-2-21" name="__codelineno-2-21"></a>        <span class="k">if</span> <span class="p">(</span><span class="nv">$request</span><span class="o">-&gt;</span><span class="na">query</span><span class="o">-&gt;</span><span class="na">has</span><span class="p">(</span><span class="s1">'block'</span><span class="p">))</span> <span class="p">{</span>
+<a id="__codelineno-2-22" name="__codelineno-2-22"></a>            <span class="c1">// eine Exception: Der Rest (Timing, die Action) wird nicht ausgeführt</span>
+<a id="__codelineno-2-23" name="__codelineno-2-23"></a>            <span class="k">throw</span> <span class="k">new</span> <span class="nx">AccessDeniedHttpException</span><span class="p">(</span><span class="s1">'access blocked'</span><span class="p">);</span>
+<a id="__codelineno-2-24" name="__codelineno-2-24"></a>        <span class="p">}</span>
+<a id="__codelineno-2-25" name="__codelineno-2-25"></a>    <span class="p">}</span>
+<a id="__codelineno-2-26" name="__codelineno-2-26"></a><span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+<ul>
+<li>Zeile 13: die Standardpriorität 0: Der Listener wird nach dem Routing aufgerufen;</li>
+<li>Zeile 20: Meldung Nr. 2. Das Routing hat den Namen der ausgewählten Route im Attribut <strong><em>[_route]</em></strong> der Anfrage gespeichert (und ihre Parameter in den gleichnamigen Attributen, Beispiel 12);</li>
+<li>Zeilen 21–24: Der Parameter <strong><em>[?block]</em></strong> der URL (<strong><em>[has]</em></strong> prüft sein Vorhandensein) löst einen 403-Fehler aus (<em>Forbidden</em>, Zugriff verweigert): Die Exception <strong><em>[AccessDeniedHttpException]</em></strong> beendet die Verarbeitung.</li>
+</ul>
+<h3 id="713-vor-der-aktion-srceventlistenertimedphp-und-timingphp">7.1.3. <span style="color: #1f4d78">Vor der Aktion: src/EventListener/Timed.php und Timing.php</span></h3>
+<p>Wir möchten nur bestimmte Aktionen messen – die, bei denen es nötig ist. Dazu genügt es, sie mit einem eigenen <strong>Attribut</strong> in <em>[PHP]</em> zu markieren:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-3-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-3-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-3-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-3-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-3-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-3-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-3-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-3-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-3-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-3-10">10</a></span>
+<span class="normal"><a href="#__codelineno-3-11">11</a></span>
+<span class="normal"><a href="#__codelineno-3-12">12</a></span>
+<span class="normal"><a href="#__codelineno-3-13">13</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1"></a><span class="cp">&lt;?php</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2"></a><span class="c1">// src/EventListener/Timed.php: ein PHP-ATTRIBUT unserer eigenen Erfindung, das auf</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3"></a><span class="c1">// den Actions platziert wird, deren Dauer wir messen wollen (siehe Listener Timing)</span>
+<a id="__codelineno-3-4" name="__codelineno-3-4"></a>
+<a id="__codelineno-3-5" name="__codelineno-3-5"></a><span class="k">namespace</span> <span class="nx">App\EventListener</span><span class="p">;</span>
+<a id="__codelineno-3-6" name="__codelineno-3-6"></a>
+<a id="__codelineno-3-7" name="__codelineno-3-7"></a><span class="k">use</span> <span class="nx">Attribute</span><span class="p">;</span>
+<a id="__codelineno-3-8" name="__codelineno-3-8"></a>
+<a id="__codelineno-3-9" name="__codelineno-3-9"></a><span class="c1">// #[Attribute]: Diese Klasse ist ein Attribut; TARGET_METHOD: Es wird auf einer Methode platziert</span>
+<a id="__codelineno-3-10" name="__codelineno-3-10"></a><span class="p">#[</span><span class="nd">Attribute</span><span class="p">(</span><span class="nx">Attribute</span><span class="o">::</span><span class="na">TARGET_METHOD</span><span class="p">)]</span>
+<a id="__codelineno-3-11" name="__codelineno-3-11"></a><span class="k">class</span> <span class="nc">Timed</span>
+<a id="__codelineno-3-12" name="__codelineno-3-12"></a><span class="p">{</span>
+<a id="__codelineno-3-13" name="__codelineno-3-13"></a><span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+<p>Ein Attribut ist eine gewöhnliche Klasse, die selbst mit dem Attribut <strong><em>[#[Attribute]]</em></strong> markiert ist; <strong><em>[Attribute::TARGET_METHOD]</em></strong> gibt an, dass es auf eine Methode angewendet wird. Dieses Attribut trägt keine Informationen: Allein sein Vorhandensein zählt.</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-4-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-4-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-4-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-4-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-4-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-4-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-4-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-4-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-4-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-4-10">10</a></span>
+<span class="normal"><a href="#__codelineno-4-11">11</a></span>
+<span class="normal"><a href="#__codelineno-4-12">12</a></span>
+<span class="normal"><a href="#__codelineno-4-13">13</a></span>
+<span class="normal"><a href="#__codelineno-4-14">14</a></span>
+<span class="normal"><a href="#__codelineno-4-15">15</a></span>
+<span class="normal"><a href="#__codelineno-4-16">16</a></span>
+<span class="normal"><a href="#__codelineno-4-17">17</a></span>
+<span class="normal"><a href="#__codelineno-4-18">18</a></span>
+<span class="normal"><a href="#__codelineno-4-19">19</a></span>
+<span class="normal"><a href="#__codelineno-4-20">20</a></span>
+<span class="normal"><a href="#__codelineno-4-21">21</a></span>
+<span class="normal"><a href="#__codelineno-4-22">22</a></span>
+<span class="normal"><a href="#__codelineno-4-23">23</a></span>
+<span class="normal"><a href="#__codelineno-4-24">24</a></span>
+<span class="normal"><a href="#__codelineno-4-25">25</a></span>
+<span class="normal"><a href="#__codelineno-4-26">26</a></span>
+<span class="normal"><a href="#__codelineno-4-27">27</a></span>
+<span class="normal"><a href="#__codelineno-4-28">28</a></span>
+<span class="normal"><a href="#__codelineno-4-29">29</a></span>
+<span class="normal"><a href="#__codelineno-4-30">30</a></span>
+<span class="normal"><a href="#__codelineno-4-31">31</a></span>
+<span class="normal"><a href="#__codelineno-4-32">32</a></span>
+<span class="normal"><a href="#__codelineno-4-33">33</a></span>
+<span class="normal"><a href="#__codelineno-4-34">34</a></span>
+<span class="normal"><a href="#__codelineno-4-35">35</a></span>
+<span class="normal"><a href="#__codelineno-4-36">36</a></span>
+<span class="normal"><a href="#__codelineno-4-37">37</a></span>
+<span class="normal"><a href="#__codelineno-4-38">38</a></span>
+<span class="normal"><a href="#__codelineno-4-39">39</a></span>
+<span class="normal"><a href="#__codelineno-4-40">40</a></span>
+<span class="normal"><a href="#__codelineno-4-41">41</a></span>
+<span class="normal"><a href="#__codelineno-4-42">42</a></span>
+<span class="normal"><a href="#__codelineno-4-43">43</a></span>
+<span class="normal"><a href="#__codelineno-4-44">44</a></span>
+<span class="normal"><a href="#__codelineno-4-45">45</a></span>
+<span class="normal"><a href="#__codelineno-4-46">46</a></span>
+<span class="normal"><a href="#__codelineno-4-47">47</a></span>
+<span class="normal"><a href="#__codelineno-4-48">48</a></span>
+<span class="normal"><a href="#__codelineno-4-49">49</a></span>
+<span class="normal"><a href="#__codelineno-4-50">50</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1"></a><span class="cp">&lt;?php</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2"></a><span class="c1">// src/EventListener/Timing.php: ein Listener für drei Ereignisse, der nur für die mit dem</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3"></a><span class="c1">// Attribut #[Timed] markierten Actions aktiv wird: VOR der Action, NACH</span>
+<a id="__codelineno-4-4" name="__codelineno-4-4"></a><span class="c1">// ihr und dann ein letztes Mal NACH dem Senden der Antwort (kernel.terminate)</span>
+<a id="__codelineno-4-5" name="__codelineno-4-5"></a>
+<a id="__codelineno-4-6" name="__codelineno-4-6"></a><span class="k">namespace</span> <span class="nx">App\EventListener</span><span class="p">;</span>
+<a id="__codelineno-4-7" name="__codelineno-4-7"></a>
+<a id="__codelineno-4-8" name="__codelineno-4-8"></a><span class="k">use</span> <span class="nx">Symfony\Component\EventDispatcher\Attribute\AsEventListener</span><span class="p">;</span>
+<a id="__codelineno-4-9" name="__codelineno-4-9"></a><span class="k">use</span> <span class="nx">Symfony\Component\HttpKernel\Event\ControllerEvent</span><span class="p">;</span>
+<a id="__codelineno-4-10" name="__codelineno-4-10"></a><span class="k">use</span> <span class="nx">Symfony\Component\HttpKernel\Event\ResponseEvent</span><span class="p">;</span>
+<a id="__codelineno-4-11" name="__codelineno-4-11"></a><span class="k">use</span> <span class="nx">Symfony\Component\HttpKernel\Event\TerminateEvent</span><span class="p">;</span>
+<a id="__codelineno-4-12" name="__codelineno-4-12"></a><span class="k">use</span> <span class="nx">Symfony\Component\HttpKernel\KernelEvents</span><span class="p">;</span>
+<a id="__codelineno-4-13" name="__codelineno-4-13"></a>
+<a id="__codelineno-4-14" name="__codelineno-4-14"></a><span class="k">class</span> <span class="nc">Timing</span>
+<a id="__codelineno-4-15" name="__codelineno-4-15"></a><span class="p">{</span>
+<a id="__codelineno-4-16" name="__codelineno-4-16"></a>    <span class="c1">// kernel.controller: Die Action wurde gewählt, sie ist noch nicht aufgerufen</span>
+<a id="__codelineno-4-17" name="__codelineno-4-17"></a>    <span class="p">#[</span><span class="nd">AsEventListener</span><span class="p">(</span><span class="nx">event</span><span class="o">:</span> <span class="nx">KernelEvents</span><span class="o">::</span><span class="na">CONTROLLER</span><span class="p">)]</span>
+<a id="__codelineno-4-18" name="__codelineno-4-18"></a>    <span class="k">public</span> <span class="k">function</span> <span class="nf">before</span><span class="p">(</span><span class="nx">ControllerEvent</span> <span class="nv">$event</span><span class="p">)</span><span class="o">:</span> <span class="nx">void</span>
+<a id="__codelineno-4-19" name="__codelineno-4-19"></a>    <span class="p">{</span>
+<a id="__codelineno-4-20" name="__codelineno-4-20"></a>        <span class="c1">// getAttributes: die PHP-Attribute einer bestimmten Klasse, die von der Action getragen werden</span>
+<a id="__codelineno-4-21" name="__codelineno-4-21"></a>        <span class="k">if</span> <span class="p">(</span><span class="nv">$event</span><span class="o">-&gt;</span><span class="na">getAttributes</span><span class="p">(</span><span class="nx">Timed</span><span class="o">::</span><span class="na">class</span><span class="p">)</span> <span class="o">===</span> <span class="p">[])</span> <span class="p">{</span>
+<a id="__codelineno-4-22" name="__codelineno-4-22"></a>            <span class="k">return</span><span class="p">;</span>
+<a id="__codelineno-4-23" name="__codelineno-4-23"></a>        <span class="p">}</span>
+<a id="__codelineno-4-24" name="__codelineno-4-24"></a>        <span class="nb">error_log</span><span class="p">(</span><span class="s1">'3. Timing, kernel.controller (before the action)'</span><span class="p">);</span>
+<a id="__codelineno-4-25" name="__codelineno-4-25"></a>        <span class="c1">// die Startzeit (hrtime: eine präzise Uhr, in Nanosekunden), gespeichert</span>
+<a id="__codelineno-4-26" name="__codelineno-4-26"></a>        <span class="c1">// in den Attributen der Anfrage (Geltungsbereich Anfrage, siehe Beispiel 12)</span>
+<a id="__codelineno-4-27" name="__codelineno-4-27"></a>        <span class="nv">$event</span><span class="o">-&gt;</span><span class="na">getRequest</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">attributes</span><span class="o">-&gt;</span><span class="na">set</span><span class="p">(</span><span class="s1">'start'</span><span class="p">,</span> <span class="nb">hrtime</span><span class="p">(</span><span class="k">true</span><span class="p">));</span>
+<a id="__codelineno-4-28" name="__codelineno-4-28"></a>    <span class="p">}</span>
+<a id="__codelineno-4-29" name="__codelineno-4-29"></a>
+<a id="__codelineno-4-30" name="__codelineno-4-30"></a>    <span class="p">#[</span><span class="nd">AsEventListener</span><span class="p">(</span><span class="nx">event</span><span class="o">:</span> <span class="nx">KernelEvents</span><span class="o">::</span><span class="na">RESPONSE</span><span class="p">)]</span>
+<a id="__codelineno-4-31" name="__codelineno-4-31"></a>    <span class="k">public</span> <span class="k">function</span> <span class="nf">after</span><span class="p">(</span><span class="nx">ResponseEvent</span> <span class="nv">$event</span><span class="p">)</span><span class="o">:</span> <span class="nx">void</span>
+<a id="__codelineno-4-32" name="__codelineno-4-32"></a>    <span class="p">{</span>
+<a id="__codelineno-4-33" name="__codelineno-4-33"></a>        <span class="k">if</span> <span class="p">(</span><span class="nv">$event</span><span class="o">-&gt;</span><span class="na">getRequest</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">attributes</span><span class="o">-&gt;</span><span class="na">has</span><span class="p">(</span><span class="s1">'start'</span><span class="p">))</span> <span class="p">{</span>
+<a id="__codelineno-4-34" name="__codelineno-4-34"></a>            <span class="nb">error_log</span><span class="p">(</span><span class="s1">'6. Timing, kernel.response (code '</span><span class="o">.</span><span class="nv">$event</span><span class="o">-&gt;</span><span class="na">getResponse</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">getStatusCode</span><span class="p">()</span><span class="o">.</span><span class="s1">')'</span><span class="p">);</span>
+<a id="__codelineno-4-35" name="__codelineno-4-35"></a>        <span class="p">}</span>
+<a id="__codelineno-4-36" name="__codelineno-4-36"></a>    <span class="p">}</span>
+<a id="__codelineno-4-37" name="__codelineno-4-37"></a>
+<a id="__codelineno-4-38" name="__codelineno-4-38"></a>    <span class="c1">// kernel.terminate: ganz am Ende, NACHDEM die Antwort an den Browser gesendet wurde;</span>
+<a id="__codelineno-4-39" name="__codelineno-4-39"></a>    <span class="c1">// die Antwort kann nicht mehr geändert werden</span>
+<a id="__codelineno-4-40" name="__codelineno-4-40"></a>    <span class="p">#[</span><span class="nd">AsEventListener</span><span class="p">(</span><span class="nx">event</span><span class="o">:</span> <span class="nx">KernelEvents</span><span class="o">::</span><span class="na">TERMINATE</span><span class="p">)]</span>
+<a id="__codelineno-4-41" name="__codelineno-4-41"></a>    <span class="k">public</span> <span class="k">function</span> <span class="nf">end</span><span class="p">(</span><span class="nx">TerminateEvent</span> <span class="nv">$event</span><span class="p">)</span><span class="o">:</span> <span class="nx">void</span>
+<a id="__codelineno-4-42" name="__codelineno-4-42"></a>    <span class="p">{</span>
+<a id="__codelineno-4-43" name="__codelineno-4-43"></a>        <span class="nv">$start</span> <span class="o">=</span> <span class="nv">$event</span><span class="o">-&gt;</span><span class="na">getRequest</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">attributes</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">'start'</span><span class="p">);</span>
+<a id="__codelineno-4-44" name="__codelineno-4-44"></a>        <span class="c1">// Die Messung hat nicht begonnen, wenn die Action nicht erreicht wurde</span>
+<a id="__codelineno-4-45" name="__codelineno-4-45"></a>        <span class="k">if</span> <span class="p">(</span><span class="nv">$start</span> <span class="o">!==</span> <span class="k">null</span><span class="p">)</span> <span class="p">{</span>
+<a id="__codelineno-4-46" name="__codelineno-4-46"></a>            <span class="nv">$ms</span> <span class="o">=</span> <span class="nb">round</span><span class="p">((</span><span class="nb">hrtime</span><span class="p">(</span><span class="k">true</span><span class="p">)</span> <span class="o">-</span> <span class="nv">$start</span><span class="p">)</span> <span class="o">/</span> <span class="mf">1e6</span><span class="p">);</span>
+<a id="__codelineno-4-47" name="__codelineno-4-47"></a>            <span class="nb">error_log</span><span class="p">(</span><span class="s2">"8. Timing, kernel.terminate (end, </span><span class="si">$ms</span><span class="s2"> ms)"</span><span class="p">);</span>
+<a id="__codelineno-4-48" name="__codelineno-4-48"></a>        <span class="p">}</span>
+<a id="__codelineno-4-49" name="__codelineno-4-49"></a>    <span class="p">}</span>
+<a id="__codelineno-4-50" name="__codelineno-4-50"></a><span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+<ul>
+<li>Zeilen 17–28: das <strong><em>[kernel.controller]</em></strong>-Ereignis. Die Methode <strong><em>[getAttributes]</em></strong> des Ereignisses liefert die <em>[PHP]</em>-Attribute einer bestimmten Klasse, die die Aktion (und ihre Klasse) trägt: Eine leere Liste bedeutet, dass die Aktion nicht markiert ist, und der Listener tut nichts. Andernfalls folgen Meldung Nr. 3 und die Startzeit, gespeichert in den Anfrageattributen (Beispiel 12). <strong><em>[hrtime(true)]</em></strong> ist eine präzise Uhr in Nanosekunden, die zum Messen von Dauern gedacht ist;</li>
+<li>Zeilen 30–36: Meldung Nr. 6 zu <strong><em>[kernel.response]</em></strong> mit dem Antwortcode, sofern die Messung gestartet wurde. Die Standardpriorität 0 setzt diesen Listener vor den von <strong><em>[Logger]</em></strong> (-100);</li>
+<li>Zeilen 40–49: das <strong><em>[kernel.terminate]</em></strong>-Ereignis, das nach dem Senden der Antwort veröffentlicht wird: Meldung Nr. 8 mit der seit Meldung Nr. 3 verstrichenen Zeit. Die Prüfung in Zeile 45 stellt sicher, dass die Messung gestartet wurde: Das Ereignis wird für alle Anfragen veröffentlicht, auch für solche, die die Aktion nicht erreicht haben.</li>
+</ul>
+<p>So implementiert <em>[Symfony]</em> selbst einige seiner Attribute: <strong><em>[#[IsGranted]]</em></strong>, das wir im nächsten Kapitel besprechen, wird von einem Listener auf <strong><em>[kernel.controller_arguments]</em></strong> gelesen, der den Zugriff auf die Aktion verweigert, wenn der Benutzer nicht die verlangte Berechtigung hat.</p>
+<h3 id="714-die-argumente-der-aktion-srcbindingintegerresolverphp-und-der-controller">7.1.4. <span style="color: #1f4d78">Die Argumente der Aktion: src/Binding/IntegerResolver.php und der Controller</span></h3>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-5-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-5-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-5-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-5-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-5-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-5-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-5-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-5-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-5-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-5-10">10</a></span>
+<span class="normal"><a href="#__codelineno-5-11">11</a></span>
+<span class="normal"><a href="#__codelineno-5-12">12</a></span>
+<span class="normal"><a href="#__codelineno-5-13">13</a></span>
+<span class="normal"><a href="#__codelineno-5-14">14</a></span>
+<span class="normal"><a href="#__codelineno-5-15">15</a></span>
+<span class="normal"><a href="#__codelineno-5-16">16</a></span>
+<span class="normal"><a href="#__codelineno-5-17">17</a></span>
+<span class="normal"><a href="#__codelineno-5-18">18</a></span>
+<span class="normal"><a href="#__codelineno-5-19">19</a></span>
+<span class="normal"><a href="#__codelineno-5-20">20</a></span>
+<span class="normal"><a href="#__codelineno-5-21">21</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1"></a><span class="cp">&lt;?php</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2"></a><span class="c1">// src/Binding/IntegerResolver.php: ein Argument Resolver (siehe Beispiel 12): der</span>
+<a id="__codelineno-5-3" name="__codelineno-5-3"></a><span class="c1">// Routenparameter, in eine Ganzzahl umgewandelt, oder in null, wenn er keine</span>
+<a id="__codelineno-5-4" name="__codelineno-5-4"></a><span class="c1">// Ganzzahl ist (dann entscheidet die Action)</span>
+<a id="__codelineno-5-5" name="__codelineno-5-5"></a>
+<a id="__codelineno-5-6" name="__codelineno-5-6"></a><span class="k">namespace</span> <span class="nx">App\Binding</span><span class="p">;</span>
+<a id="__codelineno-5-7" name="__codelineno-5-7"></a>
+<a id="__codelineno-5-8" name="__codelineno-5-8"></a><span class="k">use</span> <span class="nx">Symfony\Component\HttpFoundation\Request</span><span class="p">;</span>
+<a id="__codelineno-5-9" name="__codelineno-5-9"></a><span class="k">use</span> <span class="nx">Symfony\Component\HttpKernel\Controller\ValueResolverInterface</span><span class="p">;</span>
+<a id="__codelineno-5-10" name="__codelineno-5-10"></a><span class="k">use</span> <span class="nx">Symfony\Component\HttpKernel\ControllerMetadata\ArgumentMetadata</span><span class="p">;</span>
+<a id="__codelineno-5-11" name="__codelineno-5-11"></a>
+<a id="__codelineno-5-12" name="__codelineno-5-12"></a><span class="k">class</span> <span class="nc">IntegerResolver</span> <span class="k">implements</span> <span class="nx">ValueResolverInterface</span>
+<a id="__codelineno-5-13" name="__codelineno-5-13"></a><span class="p">{</span>
+<a id="__codelineno-5-14" name="__codelineno-5-14"></a>    <span class="k">public</span> <span class="k">function</span> <span class="nf">resolve</span><span class="p">(</span><span class="nx">Request</span> <span class="nv">$request</span><span class="p">,</span> <span class="nx">ArgumentMetadata</span> <span class="nv">$argument</span><span class="p">)</span><span class="o">:</span> <span class="nx">iterable</span>
+<a id="__codelineno-5-15" name="__codelineno-5-15"></a>    <span class="p">{</span>
+<a id="__codelineno-5-16" name="__codelineno-5-16"></a>        <span class="nv">$value</span> <span class="o">=</span> <span class="nv">$request</span><span class="o">-&gt;</span><span class="na">attributes</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="nv">$argument</span><span class="o">-&gt;</span><span class="na">getName</span><span class="p">());</span>
+<a id="__codelineno-5-17" name="__codelineno-5-17"></a>        <span class="nb">error_log</span><span class="p">(</span><span class="s2">"4. IntegerResolver, the arguments of the action (received value: </span><span class="se">\"</span><span class="si">$value</span><span class="se">\"</span><span class="s2">)"</span><span class="p">);</span>
+<a id="__codelineno-5-18" name="__codelineno-5-18"></a>        <span class="nv">$n</span> <span class="o">=</span> <span class="nb">filter_var</span><span class="p">(</span><span class="nv">$value</span><span class="p">,</span> <span class="nx">FILTER_VALIDATE_INT</span><span class="p">);</span>
+<a id="__codelineno-5-19" name="__codelineno-5-19"></a>        <span class="k">return</span> <span class="p">[</span><span class="nv">$n</span> <span class="o">===</span> <span class="k">false</span> <span class="o">?</span> <span class="k">null</span> <span class="o">:</span> <span class="nv">$n</span><span class="p">];</span>
+<a id="__codelineno-5-20" name="__codelineno-5-20"></a>    <span class="p">}</span>
+<a id="__codelineno-5-21" name="__codelineno-5-21"></a><span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+<p>Ein Argument-Resolver (Beispiel 12), der Meldung Nr. 4 schreibt. Er akzeptiert beliebigen Text und wandelt ihn in eine ganze Zahl um, oder in <strong><em>[null]</em></strong> , wenn es keine ist (<strong><em>[filter_var]</em></strong> liefert <strong><em>[false]</em></strong>): Anders als eine Einschränkung wie <strong><em>[requirements]</em></strong> (Beispiel 02), die für <strong><em>[/square/abc]</em></strong> eine 404-Seite liefern würde, entscheidet hier die Aktion über das Ergebnis.</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-6-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-6-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-6-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-6-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-6-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-6-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-6-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-6-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-6-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-6-10">10</a></span>
+<span class="normal"><a href="#__codelineno-6-11">11</a></span>
+<span class="normal"><a href="#__codelineno-6-12">12</a></span>
+<span class="normal"><a href="#__codelineno-6-13">13</a></span>
+<span class="normal"><a href="#__codelineno-6-14">14</a></span>
+<span class="normal"><a href="#__codelineno-6-15">15</a></span>
+<span class="normal"><a href="#__codelineno-6-16">16</a></span>
+<span class="normal"><a href="#__codelineno-6-17">17</a></span>
+<span class="normal"><a href="#__codelineno-6-18">18</a></span>
+<span class="normal"><a href="#__codelineno-6-19">19</a></span>
+<span class="normal"><a href="#__codelineno-6-20">20</a></span>
+<span class="normal"><a href="#__codelineno-6-21">21</a></span>
+<span class="normal"><a href="#__codelineno-6-22">22</a></span>
+<span class="normal"><a href="#__codelineno-6-23">23</a></span>
+<span class="normal"><a href="#__codelineno-6-24">24</a></span>
+<span class="normal"><a href="#__codelineno-6-25">25</a></span>
+<span class="normal"><a href="#__codelineno-6-26">26</a></span>
+<span class="normal"><a href="#__codelineno-6-27">27</a></span>
+<span class="normal"><a href="#__codelineno-6-28">28</a></span>
+<span class="normal"><a href="#__codelineno-6-29">29</a></span>
+<span class="normal"><a href="#__codelineno-6-30">30</a></span>
+<span class="normal"><a href="#__codelineno-6-31">31</a></span>
+<span class="normal"><a href="#__codelineno-6-32">32</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1"></a><span class="cp">&lt;?php</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2"></a><span class="c1">// src/Controller/CalcController.php: eine zeitgemessene Action</span>
+<a id="__codelineno-6-3" name="__codelineno-6-3"></a>
+<a id="__codelineno-6-4" name="__codelineno-6-4"></a><span class="k">namespace</span> <span class="nx">App\Controller</span><span class="p">;</span>
+<a id="__codelineno-6-5" name="__codelineno-6-5"></a>
+<a id="__codelineno-6-6" name="__codelineno-6-6"></a><span class="k">use</span> <span class="nx">App\EventListener\Timed</span><span class="p">;</span>
+<a id="__codelineno-6-7" name="__codelineno-6-7"></a><span class="k">use</span> <span class="nx">App\Binding\IntegerResolver</span><span class="p">;</span>
+<a id="__codelineno-6-8" name="__codelineno-6-8"></a><span class="k">use</span> <span class="nx">DomainException</span><span class="p">;</span>
+<a id="__codelineno-6-9" name="__codelineno-6-9"></a><span class="k">use</span> <span class="nx">Symfony\Bundle\FrameworkBundle\Controller\AbstractController</span><span class="p">;</span>
+<a id="__codelineno-6-10" name="__codelineno-6-10"></a><span class="k">use</span> <span class="nx">Symfony\Component\HttpFoundation\Response</span><span class="p">;</span>
+<a id="__codelineno-6-11" name="__codelineno-6-11"></a><span class="k">use</span> <span class="nx">Symfony\Component\HttpKernel\Attribute\ValueResolver</span><span class="p">;</span>
+<a id="__codelineno-6-12" name="__codelineno-6-12"></a><span class="k">use</span> <span class="nx">Symfony\Component\HttpKernel\Exception\BadRequestHttpException</span><span class="p">;</span>
+<a id="__codelineno-6-13" name="__codelineno-6-13"></a><span class="k">use</span> <span class="nx">Symfony\Component\Routing\Attribute\Route</span><span class="p">;</span>
+<a id="__codelineno-6-14" name="__codelineno-6-14"></a>
+<a id="__codelineno-6-15" name="__codelineno-6-15"></a><span class="k">class</span> <span class="nc">CalcController</span> <span class="k">extends</span> <span class="nx">AbstractController</span>
+<a id="__codelineno-6-16" name="__codelineno-6-16"></a><span class="p">{</span>
+<a id="__codelineno-6-17" name="__codelineno-6-17"></a>    <span class="c1">// $n: der Routenparameter {n}, bereitgestellt von unserem Resolver IntegerResolver;</span>
+<a id="__codelineno-6-18" name="__codelineno-6-18"></a>    <span class="c1">// #[Timed]: Der Listener Timing misst die Dauer dieser Action</span>
+<a id="__codelineno-6-19" name="__codelineno-6-19"></a>    <span class="p">#[</span><span class="nd">Route</span><span class="p">(</span><span class="s1">'/square/{n}'</span><span class="p">,</span> <span class="nx">name</span><span class="o">:</span> <span class="s1">'square'</span><span class="p">,</span> <span class="nx">methods</span><span class="o">:</span> <span class="p">[</span><span class="s1">'GET'</span><span class="p">])]</span>
+<a id="__codelineno-6-20" name="__codelineno-6-20"></a>    <span class="p">#[</span><span class="nd">Timed</span><span class="p">]</span>
+<a id="__codelineno-6-21" name="__codelineno-6-21"></a>    <span class="k">public</span> <span class="k">function</span> <span class="nf">square</span><span class="p">(#[</span><span class="nd">ValueResolver</span><span class="p">(</span><span class="nx">IntegerResolver</span><span class="o">::</span><span class="na">class</span><span class="p">)]</span> <span class="o">?</span><span class="nx">int</span> <span class="nv">$n</span><span class="p">)</span><span class="o">:</span> <span class="nd">Response</span>
+<a id="__codelineno-6-22" name="__codelineno-6-22"></a>    <span class="p">{</span>
+<a id="__codelineno-6-23" name="__codelineno-6-23"></a>        <span class="nd">error_log</span><span class="p">(</span><span class="s2">"5. action square(</span><span class="si">$n</span><span class="s2">)"</span><span class="p">);</span>
+<a id="__codelineno-6-24" name="__codelineno-6-24"></a>        <span class="nd">if</span> <span class="p">(</span><span class="nv">$n</span> <span class="o">===</span> <span class="k">null</span><span class="p">)</span> <span class="p">{</span>
+<a id="__codelineno-6-25" name="__codelineno-6-25"></a>            <span class="nd">throw</span> <span class="nd">new</span> <span class="nd">BadRequestHttpException</span><span class="p">(</span><span class="s1">'not an integer'</span><span class="p">);</span>    <span class="c1">// Fehler 400: siehe ErrorPage</span>
+<a id="__codelineno-6-26" name="__codelineno-6-26"></a>        <span class="p">}</span>
+<a id="__codelineno-6-27" name="__codelineno-6-27"></a>        <span class="nd">if</span> <span class="p">(</span><span class="nv">$n</span> <span class="o">===</span> <span class="mi">13</span><span class="p">)</span> <span class="p">{</span>
+<a id="__codelineno-6-28" name="__codelineno-6-28"></a>            <span class="nd">throw</span> <span class="nd">new</span> <span class="nd">DomainException</span><span class="p">(</span><span class="s1">'13 brings bad luck'</span><span class="p">);</span>    <span class="c1">// ein „unerwarteter“ Fehler</span>
+<a id="__codelineno-6-29" name="__codelineno-6-29"></a>        <span class="p">}</span>
+<a id="__codelineno-6-30" name="__codelineno-6-30"></a>        <span class="nd">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">render</span><span class="p">(</span><span class="s1">'calc/result.html.twig'</span><span class="p">,</span> <span class="p">[</span><span class="s1">'n'</span> <span class="o">=&gt;</span> <span class="nv">$n</span><span class="p">,</span> <span class="s1">'square'</span> <span class="o">=&gt;</span> <span class="nv">$n</span> <span class="o">*</span> <span class="nv">$n</span><span class="p">]);</span>
+<a id="__codelineno-6-31" name="__codelineno-6-31"></a>    <span class="p">}</span>
+<a id="__codelineno-6-32" name="__codelineno-6-32"></a><span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+<ul>
+<li>Zeile 20: Die Aktion ist mit unserem Attribut <strong><em>[#[Timed]]</em></strong> markiert;</li>
+<li>Zeile 21: Der Parameter <strong><em>[$n]</em></strong> wird von unserem Resolver geliefert (Attribut <strong><em>[#[ValueResolver]]</em></strong>, Beispiel 12);</li>
+<li>Zeilen 24–26: ein Parameter, der keine ganze Zahl ist: Fehler 400 (<em>Bad Request</em>), ausgelöst durch die Exception <strong><em>[BadRequestHttpException]</em></strong>;</li>
+<li>Zeilen 27–29: Die Zahl 13 löst einen „unerwarteten“ Fehler aus. <strong><em>[DomainException]</em></strong> ist eine Exception-Klasse aus der Standardbibliothek von <em>[PHP]</em>;</li>
+<li>Zeile 30: der Normalfall. Die View <strong><em>[calc/result.html.twig]</em></strong> zeigt einfach das Ergebnis an.</li>
+</ul>
+<h3 id="715-fehlerbehandlung-srceventlistenererrorpagephp">7.1.5. <span style="color: #1f4d78">Fehlerbehandlung: src/EventListener/ErrorPage.php</span></h3>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-7-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-7-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-7-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-7-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-7-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-7-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-7-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-7-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-7-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-7-10">10</a></span>
+<span class="normal"><a href="#__codelineno-7-11">11</a></span>
+<span class="normal"><a href="#__codelineno-7-12">12</a></span>
+<span class="normal"><a href="#__codelineno-7-13">13</a></span>
+<span class="normal"><a href="#__codelineno-7-14">14</a></span>
+<span class="normal"><a href="#__codelineno-7-15">15</a></span>
+<span class="normal"><a href="#__codelineno-7-16">16</a></span>
+<span class="normal"><a href="#__codelineno-7-17">17</a></span>
+<span class="normal"><a href="#__codelineno-7-18">18</a></span>
+<span class="normal"><a href="#__codelineno-7-19">19</a></span>
+<span class="normal"><a href="#__codelineno-7-20">20</a></span>
+<span class="normal"><a href="#__codelineno-7-21">21</a></span>
+<span class="normal"><a href="#__codelineno-7-22">22</a></span>
+<span class="normal"><a href="#__codelineno-7-23">23</a></span>
+<span class="normal"><a href="#__codelineno-7-24">24</a></span>
+<span class="normal"><a href="#__codelineno-7-25">25</a></span>
+<span class="normal"><a href="#__codelineno-7-26">26</a></span>
+<span class="normal"><a href="#__codelineno-7-27">27</a></span>
+<span class="normal"><a href="#__codelineno-7-28">28</a></span>
+<span class="normal"><a href="#__codelineno-7-29">29</a></span>
+<span class="normal"><a href="#__codelineno-7-30">30</a></span>
+<span class="normal"><a href="#__codelineno-7-31">31</a></span>
+<span class="normal"><a href="#__codelineno-7-32">32</a></span>
+<span class="normal"><a href="#__codelineno-7-33">33</a></span>
+<span class="normal"><a href="#__codelineno-7-34">34</a></span>
+<span class="normal"><a href="#__codelineno-7-35">35</a></span>
+<span class="normal"><a href="#__codelineno-7-36">36</a></span>
+<span class="normal"><a href="#__codelineno-7-37">37</a></span>
+<span class="normal"><a href="#__codelineno-7-38">38</a></span>
+<span class="normal"><a href="#__codelineno-7-39">39</a></span>
+<span class="normal"><a href="#__codelineno-7-40">40</a></span>
+<span class="normal"><a href="#__codelineno-7-41">41</a></span>
+<span class="normal"><a href="#__codelineno-7-42">42</a></span>
+<span class="normal"><a href="#__codelineno-7-43">43</a></span>
+<span class="normal"><a href="#__codelineno-7-44">44</a></span>
+<span class="normal"><a href="#__codelineno-7-45">45</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1"></a><span class="cp">&lt;?php</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2"></a><span class="c1">// src/EventListener/ErrorPage.php: ein Listener von kernel.exception, der die</span>
+<a id="__codelineno-7-3" name="__codelineno-7-3"></a><span class="c1">// Fehlerseiten von Symfony durch unsere ersetzt</span>
+<a id="__codelineno-7-4" name="__codelineno-7-4"></a>
+<a id="__codelineno-7-5" name="__codelineno-7-5"></a><span class="k">namespace</span> <span class="nx">App\EventListener</span><span class="p">;</span>
+<a id="__codelineno-7-6" name="__codelineno-7-6"></a>
+<a id="__codelineno-7-7" name="__codelineno-7-7"></a><span class="k">use</span> <span class="nx">DomainException</span><span class="p">;</span>
+<a id="__codelineno-7-8" name="__codelineno-7-8"></a><span class="k">use</span> <span class="nx">Symfony\Component\EventDispatcher\Attribute\AsEventListener</span><span class="p">;</span>
+<a id="__codelineno-7-9" name="__codelineno-7-9"></a><span class="k">use</span> <span class="nx">Symfony\Component\HttpFoundation\Response</span><span class="p">;</span>
+<a id="__codelineno-7-10" name="__codelineno-7-10"></a><span class="k">use</span> <span class="nx">Symfony\Component\HttpKernel\Event\ExceptionEvent</span><span class="p">;</span>
+<a id="__codelineno-7-11" name="__codelineno-7-11"></a><span class="k">use</span> <span class="nx">Symfony\Component\HttpKernel\Exception\HttpExceptionInterface</span><span class="p">;</span>
+<a id="__codelineno-7-12" name="__codelineno-7-12"></a><span class="k">use</span> <span class="nx">Symfony\Component\HttpKernel\KernelEvents</span><span class="p">;</span>
+<a id="__codelineno-7-13" name="__codelineno-7-13"></a><span class="k">use</span> <span class="nx">Twig\Environment</span><span class="p">;</span>
+<a id="__codelineno-7-14" name="__codelineno-7-14"></a>
+<a id="__codelineno-7-15" name="__codelineno-7-15"></a><span class="c1">// Priorität -10: nach dem Listener von Symfony, der die Exception ins Log schreibt (0),</span>
+<a id="__codelineno-7-16" name="__codelineno-7-16"></a><span class="c1">// vor dem, der ihre Fehlerseite baut (-128)</span>
+<a id="__codelineno-7-17" name="__codelineno-7-17"></a><span class="p">#[</span><span class="nd">AsEventListener</span><span class="p">(</span><span class="nx">event</span><span class="o">:</span> <span class="nx">KernelEvents</span><span class="o">::</span><span class="na">EXCEPTION</span><span class="p">,</span> <span class="nx">priority</span><span class="o">:</span> <span class="o">-</span><span class="mi">10</span><span class="p">)]</span>
+<a id="__codelineno-7-18" name="__codelineno-7-18"></a><span class="k">class</span> <span class="nc">ErrorPage</span>
+<a id="__codelineno-7-19" name="__codelineno-7-19"></a><span class="p">{</span>
+<a id="__codelineno-7-20" name="__codelineno-7-20"></a>    <span class="c1">// Environment: die Twig-Engine selbst, um eine Seite außerhalb eines Controllers zu bauen</span>
+<a id="__codelineno-7-21" name="__codelineno-7-21"></a>    <span class="k">public</span> <span class="k">function</span> <span class="fm">__construct</span><span class="p">(</span><span class="k">private</span> <span class="nx">Environment</span> <span class="nv">$twig</span><span class="p">)</span>
+<a id="__codelineno-7-22" name="__codelineno-7-22"></a>    <span class="p">{</span>
+<a id="__codelineno-7-23" name="__codelineno-7-23"></a>    <span class="p">}</span>
+<a id="__codelineno-7-24" name="__codelineno-7-24"></a>
+<a id="__codelineno-7-25" name="__codelineno-7-25"></a>    <span class="k">public</span> <span class="k">function</span> <span class="fm">__invoke</span><span class="p">(</span><span class="nx">ExceptionEvent</span> <span class="nv">$event</span><span class="p">)</span><span class="o">:</span> <span class="nx">void</span>
+<a id="__codelineno-7-26" name="__codelineno-7-26"></a>    <span class="p">{</span>
+<a id="__codelineno-7-27" name="__codelineno-7-27"></a>        <span class="nv">$e</span> <span class="o">=</span> <span class="nv">$event</span><span class="o">-&gt;</span><span class="na">getThrowable</span><span class="p">();</span>
+<a id="__codelineno-7-28" name="__codelineno-7-28"></a>        <span class="k">if</span> <span class="p">(</span><span class="nv">$e</span> <span class="nx">instanceof</span> <span class="nx">HttpExceptionInterface</span><span class="p">)</span> <span class="p">{</span>
+<a id="__codelineno-7-29" name="__codelineno-7-29"></a>            <span class="c1">// die HTTP-Fehler (403, unbekannte Seite -&gt; 404...): HttpExceptionInterface</span>
+<a id="__codelineno-7-30" name="__codelineno-7-30"></a>            <span class="c1">// ist das Interface aller HTTP-Exceptions; sie tragen ihren Code</span>
+<a id="__codelineno-7-31" name="__codelineno-7-31"></a>            <span class="nb">error_log</span><span class="p">(</span><span class="s2">"x. ErrorPage, kernel.exception (HTTP </span><span class="si">{</span><span class="nv">$e</span><span class="o">-&gt;</span><span class="na">getStatusCode</span><span class="p">()</span><span class="si">}</span><span class="s2">)"</span><span class="p">);</span>
+<a id="__codelineno-7-32" name="__codelineno-7-32"></a>            <span class="nv">$code</span> <span class="o">=</span> <span class="nv">$e</span><span class="o">-&gt;</span><span class="na">getStatusCode</span><span class="p">();</span>
+<a id="__codelineno-7-33" name="__codelineno-7-33"></a>        <span class="p">}</span> <span class="k">elseif</span> <span class="p">(</span><span class="nv">$e</span> <span class="nx">instanceof</span> <span class="nx">DomainException</span><span class="p">)</span> <span class="p">{</span>
+<a id="__codelineno-7-34" name="__codelineno-7-34"></a>            <span class="c1">// eine „unerwartete“ Exception eines bestimmten Typs: DomainException und ihre Unterklassen</span>
+<a id="__codelineno-7-35" name="__codelineno-7-35"></a>            <span class="nb">error_log</span><span class="p">(</span><span class="s2">"x. ErrorPage, kernel.exception (DomainException: </span><span class="si">{</span><span class="nv">$e</span><span class="o">-&gt;</span><span class="na">getMessage</span><span class="p">()</span><span class="si">}</span><span class="s2">)"</span><span class="p">);</span>
+<a id="__codelineno-7-36" name="__codelineno-7-36"></a>            <span class="nv">$code</span> <span class="o">=</span> <span class="mi">500</span><span class="p">;</span>
+<a id="__codelineno-7-37" name="__codelineno-7-37"></a>        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+<a id="__codelineno-7-38" name="__codelineno-7-38"></a>            <span class="k">return</span><span class="p">;</span>    <span class="c1">// die anderen: die Fehlerseite von Symfony</span>
+<a id="__codelineno-7-39" name="__codelineno-7-39"></a>        <span class="p">}</span>
+<a id="__codelineno-7-40" name="__codelineno-7-40"></a>        <span class="c1">// Die Antwort des Ereignisses ersetzt die Exception (die folgenden Listener werden</span>
+<a id="__codelineno-7-41" name="__codelineno-7-41"></a>        <span class="c1">// nicht aufgerufen); sie durchläuft dann kernel.response wie eine gewöhnliche Antwort</span>
+<a id="__codelineno-7-42" name="__codelineno-7-42"></a>        <span class="nv">$event</span><span class="o">-&gt;</span><span class="na">setResponse</span><span class="p">(</span><span class="k">new</span> <span class="nx">Response</span><span class="p">(</span>
+<a id="__codelineno-7-43" name="__codelineno-7-43"></a>            <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">twig</span><span class="o">-&gt;</span><span class="na">render</span><span class="p">(</span><span class="s1">'error.html.twig'</span><span class="p">,</span> <span class="p">[</span><span class="s1">'code'</span> <span class="o">=&gt;</span> <span class="nv">$code</span><span class="p">]),</span> <span class="nv">$code</span><span class="p">));</span>
+<a id="__codelineno-7-44" name="__codelineno-7-44"></a>    <span class="p">}</span>
+<a id="__codelineno-7-45" name="__codelineno-7-45"></a><span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+<ul>
+<li>Zeilen 15–17: der Listener für <strong><em>[kernel.exception]</em></strong> mit Priorität -10. <em>[Symfony]</em> registriert für dieses Ereignis zwei Listener: Der erste mit Priorität 0 protokolliert die Exception; der zweite mit Priorität -128 erzeugt die Fehlerseite von <em>[Symfony]</em>. Unserer liegt zwischen beiden: Die Exception wird protokolliert, dann zeigen wir die Seite an;</li>
+<li>Zeile 21: Der Listener ist kein Controller und hat nicht die Methode <strong><em>[render]</em></strong> von <strong><em>[AbstractController]</em></strong>: Er erhält die <em>[Twig]</em>-Engine selbst (die Klasse <strong><em>[Twig\Environment]</em></strong>), deren Methode <strong><em>[render]</em></strong> die gerenderte Seite als String zurückgibt;</li>
+<li>Zeilen 28–32: alle HTTP-Fehler: eine URL ohne Route (404), eine abgelehnte Methode (405) und die Exceptions <strong><em>[AccessDeniedHttpException]</em></strong> (403) und <strong><em>[BadRequestHttpException]</em></strong> (400) ... implementieren das Interface <strong><em>[HttpExceptionInterface]</em></strong> und tragen ihren Code (<strong><em>[getStatusCode()]</em></strong>). Dieser einzelne Test ersetzt daher alle <em>[Symfony]</em>-Fehlerseiten durch unsere;</li>
+<li>Zeilen 33–36: eine Exception der Klasse <strong><em>[DomainException]</em></strong> (oder ihrer Unterklassen; siehe Beispiel 08): ein „unerwarteter“ Fehler, umgewandelt in eine „eigene“ Fehlerseite mit dem Statuscode 500 (<em>Internal Server Error</em>). Die Meldung der Exception wird in der Konsole angezeigt, aber nicht auf der Seite: Sie kann interne Details enthalten, die für den Benutzer nicht relevant sind;</li>
+<li>Zeilen 37–39: Die anderen Exceptions werden von <em>[Symfony]</em> behandelt;</li>
+<li>Zeilen 42–43: <strong><em>[setResponse]</em></strong> liefert die Antwort, die die Exception ersetzt und die Weitergabe des Ereignisses stoppt: Nachfolgende Listener (die Fehlerseite von <em>[Symfony]</em>) werden nicht aufgerufen.</li>
+</ul>
+<p>Die Fehlerseite erhält den Fehlercode und zeigt eine passende Meldung an:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-8-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-8-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-8-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-8-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-8-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-8-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-8-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-8-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-8-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-8-10">10</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1"></a>{% extends 'layout.html.twig' %}
+<a id="__codelineno-8-2" name="__codelineno-8-2"></a>{# die Fehlerseite; ihr Modell: der Fehlercode #}
+<a id="__codelineno-8-3" name="__codelineno-8-3"></a>
+<a id="__codelineno-8-4" name="__codelineno-8-4"></a>{% block content %}
+<a id="__codelineno-8-5" name="__codelineno-8-5"></a>  <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">"alert alert-danger"</span><span class="p">&gt;</span>
+<a id="__codelineno-8-6" name="__codelineno-8-6"></a>    <span class="p">&lt;</span><span class="nt">h1</span> <span class="na">class</span><span class="o">=</span><span class="s">"h4"</span><span class="p">&gt;</span>Error {{ code }}<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
+<a id="__codelineno-8-7" name="__codelineno-8-7"></a>    {# ein assoziatives Array, nach dem Code indiziert; ??: der Standardwert #}
+<a id="__codelineno-8-8" name="__codelineno-8-8"></a>    <span class="p">&lt;</span><span class="nt">p</span> <span class="na">class</span><span class="o">=</span><span class="s">"mb-0"</span><span class="p">&gt;</span>{{ {400: 'Bad request.', 403: 'Access denied.', 404: 'Page not found.'}[code] ?? 'Internal server error.' }}<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+<a id="__codelineno-8-9" name="__codelineno-8-9"></a>  <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+<a id="__codelineno-8-10" name="__codelineno-8-10"></a>{% endblock %}
+</code></pre></div></td></tr></table></div>
+<ul>
+<li>Zeile 8: ein in der View definiertes assoziatives Array (<strong><em>[{key: value, ...}]</em></strong>), aus dem das Element mit dem Index <strong><em>[code]</em></strong> abgerufen wird; der Operator <strong><em>[??]</em></strong> liefert einen Standardwert, wenn dieses Element nicht existiert.</li>
+</ul>
+<p>Es gibt noch einen weiteren, noch einfacheren Weg, Fehlerseiten zu ersetzen, ohne einen Listener zu schreiben: Eine View mit dem Namen <strong><em>[templates/bundles/TwigBundle/Exception/error404.html.twig]</em></strong> ersetzt die 404-Fehlerseite, und ebenso für jeden Code (<strong><em>[error.html.twig]</em></strong> für alle anderen). Diese Views werden nur in der Produktion verwendet; der Debug-Modus behält seine detaillierten Seiten (Sie können sie im Debug-Modus unter <strong><em>[/_error/404]</em></strong> in der Vorschau ansehen, sofern Sie die Routen <strong><em>[@FrameworkBundle/Resources/config/routing/errors.php]</em></strong> importiert haben). Ein Listener dagegen erlaubt jede Art der Behandlung (eine JSON-Antwort, eine Weiterleitung usw.) in allen Modi.</p>
+<h3 id="716-ausfuhrung">7.1.6. <span style="color: #1f4d78">Ausführung</span></h3>
+<p>Normalfall, <strong><em>[/square/7]</em></strong>:</p>
+<p><img src="images/10000000000002BE0000008D3E9CA2AB.png" width="428" height="86" style="width:11.322cm;height:2.274cm;" alt="Image" class="odt-zoomable" data-zoom-src="images/10000000000002BE0000008D3E9CA2AB.png" /></p>
+<p>Die Server-Konsole zeigt die acht Schritte der Reihe nach an (die Zeitangaben, die <strong><em>[php -S]</em></strong> am Anfang der Zeilen einfügt, wurden entfernt):</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-9-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-9-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-9-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-9-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-9-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-9-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-9-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-9-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-9-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-9-10">10</a></span>
+<span class="normal"><a href="#__codelineno-9-11">11</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1"></a>--- GET /square/7
+<a id="__codelineno-9-2" name="__codelineno-9-2"></a>1. Logger, kernel.request (before the routing)
+<a id="__codelineno-9-3" name="__codelineno-9-3"></a>[info] Matched route "square".
+<a id="__codelineno-9-4" name="__codelineno-9-4"></a>2. Block, kernel.request (route: square)
+<a id="__codelineno-9-5" name="__codelineno-9-5"></a>3. Timing, kernel.controller (before the action)
+<a id="__codelineno-9-6" name="__codelineno-9-6"></a>4. IntegerResolver, the arguments of the action (received value: "7")
+<a id="__codelineno-9-7" name="__codelineno-9-7"></a>5. action square(7)
+<a id="__codelineno-9-8" name="__codelineno-9-8"></a>6. Timing, kernel.response (code 200)
+<a id="__codelineno-9-9" name="__codelineno-9-9"></a>7. Logger, kernel.response (code 200)
+<a id="__codelineno-9-10" name="__codelineno-9-10"></a>8. Timing, kernel.terminate (end, 2 ms)
+<a id="__codelineno-9-11" name="__codelineno-9-11"></a>127.0.0.1:51612 [200]: GET /square/7
+</code></pre></div></td></tr></table></div>
+<p>Die Zeile <strong><em>[[info]]</em></strong> stammt vom Routing von <em>[Symfony]</em>: Das ist dessen <strong>Log</strong> (<em>log</em>). Ohne eine Logging-Bibliothek (die am häufigsten verwendete ist <em>[Monolog]</em>, installiert durch <strong><em>[composer require logger]</em></strong>) verwendet <em>[Symfony]</em> ein minimales Log, das in die Konsole schreibt. Die letzte Zeile ist das Log des Entwicklungsservers, das nach Abschluss der Anfrage geschrieben wird. Ein blockierter Zugriff, <strong><em>[/square/7?block]</em></strong>:</p>
+<p><img src="images/10000000000002BE000000B65E9F305E.png" width="428" height="111" style="width:11.322cm;height:2.935cm;" alt="Image" class="odt-zoomable" data-zoom-src="images/10000000000002BE000000B65E9F305E.png" /></p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-10-1">1</a></span>
+<span class="normal"><a href="#__codelineno-10-2">2</a></span>
+<span class="normal"><a href="#__codelineno-10-3">3</a></span>
+<span class="normal"><a href="#__codelineno-10-4">4</a></span>
+<span class="normal"><a href="#__codelineno-10-5">5</a></span>
+<span class="normal"><a href="#__codelineno-10-6">6</a></span>
+<span class="normal"><a href="#__codelineno-10-7">7</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1"></a>--- GET /square/7?block
+<a id="__codelineno-10-2" name="__codelineno-10-2"></a>1. Logger, kernel.request (before the routing)
+<a id="__codelineno-10-3" name="__codelineno-10-3"></a>[info] Matched route "square".
+<a id="__codelineno-10-4" name="__codelineno-10-4"></a>2. Block, kernel.request (route: square)
+<a id="__codelineno-10-5" name="__codelineno-10-5"></a>[error] Uncaught PHP Exception Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException: "access blocked" at Block.php line 23
+<a id="__codelineno-10-6" name="__codelineno-10-6"></a>x. ErrorPage, kernel.exception (HTTP 403)
+<a id="__codelineno-10-7" name="__codelineno-10-7"></a>7. Logger, kernel.response (code 403)
+</code></pre></div></td></tr></table></div>
+<p>Der Listener <strong><em>[Block]</em></strong> hat eine Exception ausgelöst: Die Aktion wurde nicht ausgewählt, ihre Argumente wurden nicht berechnet, und sie wurde nicht aufgerufen. Die Exception wurde von <em>[Symfony]</em> protokolliert und dann von unserem Listener in eine Antwort umgewandelt; diese Antwort durchlief <strong><em>[kernel.response]</em></strong>. Das Ereignis <strong><em>[kernel.terminate]</em></strong> wurde veröffentlicht, aber <strong><em>[Timing]</em></strong> hat nichts angezeigt, da die Messung nicht gestartet war. Ein Parameter, der keine ganze Zahl ist, <strong><em>[/square/abc]</em></strong>:</p>
+<p><img src="images/10000000000002BE000000B6EF91FCFB.png" width="428" height="111" style="width:11.322cm;height:2.935cm;" alt="Image" class="odt-zoomable" data-zoom-src="images/10000000000002BE000000B6EF91FCFB.png" /></p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-11-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-11-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-11-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-11-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-11-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-11-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-11-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-11-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-11-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-11-10">10</a></span>
+<span class="normal"><a href="#__codelineno-11-11">11</a></span>
+<span class="normal"><a href="#__codelineno-11-12">12</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1"></a>--- GET /square/abc
+<a id="__codelineno-11-2" name="__codelineno-11-2"></a>1. Logger, kernel.request (before the routing)
+<a id="__codelineno-11-3" name="__codelineno-11-3"></a>[info] Matched route "square".
+<a id="__codelineno-11-4" name="__codelineno-11-4"></a>2. Block, kernel.request (route: square)
+<a id="__codelineno-11-5" name="__codelineno-11-5"></a>3. Timing, kernel.controller (before the action)
+<a id="__codelineno-11-6" name="__codelineno-11-6"></a>4. IntegerResolver, the arguments of the action (received value: "abc")
+<a id="__codelineno-11-7" name="__codelineno-11-7"></a>5. action square()
+<a id="__codelineno-11-8" name="__codelineno-11-8"></a>[error] Uncaught PHP Exception Symfony\Component\HttpKernel\Exception\BadRequestHttpException: "not an integer" at CalcController.php line 25
+<a id="__codelineno-11-9" name="__codelineno-11-9"></a>x. ErrorPage, kernel.exception (HTTP 400)
+<a id="__codelineno-11-10" name="__codelineno-11-10"></a>6. Timing, kernel.response (code 400)
+<a id="__codelineno-11-11" name="__codelineno-11-11"></a>7. Logger, kernel.response (code 400)
+<a id="__codelineno-11-12" name="__codelineno-11-12"></a>8. Timing, kernel.terminate (end, 1 ms)
+</code></pre></div></td></tr></table></div>
+<p>Diesmal wurde die Aktion mit <strong><em>[null]</em></strong> aufgerufen (was als leere Zeichenkette dargestellt wird: <strong><em>[square()]</em></strong>), und diese Aktion hat den Fehler 400 ausgelöst. Ein „unerwarteter“ Fehler, <strong><em>[/square/13]</em></strong>:</p>
+<p><img src="images/10000000000002BE000000B6BF46F91B.png" width="428" height="111" style="width:11.322cm;height:2.935cm;" alt="Image" class="odt-zoomable" data-zoom-src="images/10000000000002BE000000B6BF46F91B.png" /></p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-12-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-12-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-12-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-12-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-12-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-12-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-12-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-12-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-12-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-12-10">10</a></span>
+<span class="normal"><a href="#__codelineno-12-11">11</a></span>
+<span class="normal"><a href="#__codelineno-12-12">12</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1"></a>--- GET /square/13
+<a id="__codelineno-12-2" name="__codelineno-12-2"></a>1. Logger, kernel.request (before the routing)
+<a id="__codelineno-12-3" name="__codelineno-12-3"></a>[info] Matched route "square".
+<a id="__codelineno-12-4" name="__codelineno-12-4"></a>2. Block, kernel.request (route: square)
+<a id="__codelineno-12-5" name="__codelineno-12-5"></a>3. Timing, kernel.controller (before the action)
+<a id="__codelineno-12-6" name="__codelineno-12-6"></a>4. IntegerResolver, the arguments of the action (received value: "13")
+<a id="__codelineno-12-7" name="__codelineno-12-7"></a>5. action square(13)
+<a id="__codelineno-12-8" name="__codelineno-12-8"></a>[critical] Uncaught PHP Exception DomainException: "13 brings bad luck" at CalcController.php line 28
+<a id="__codelineno-12-9" name="__codelineno-12-9"></a>x. ErrorPage, kernel.exception (DomainException: 13 brings bad luck)
+<a id="__codelineno-12-10" name="__codelineno-12-10"></a>6. Timing, kernel.response (code 500)
+<a id="__codelineno-12-11" name="__codelineno-12-11"></a>7. Logger, kernel.response (code 500)
+<a id="__codelineno-12-12" name="__codelineno-12-12"></a>8. Timing, kernel.terminate (end, 1 ms)
+</code></pre></div></td></tr></table></div>
+<p>Die Exception wurde von unserem Listener behandelt: Der Benutzer sieht die „eigene“ Fehlerseite, nicht die detaillierte Seite, obwohl der Debug-Modus aktiv ist. Sie wurde dennoch protokolliert, und zwar mit dem Level <strong><em>[critical]</em></strong> (ein HTTP-Fehler ist lediglich ein <strong><em>[error]</em></strong>): Wie <em>[Laravel]</em> unterscheidet <em>[Symfony]</em> zwischen dem <strong>Protokollieren</strong> einer Exception im Log und der <strong>Antwort</strong>, die sie erzeugt. Schließlich eine URL, die keiner Route entspricht, <strong><em>[/unknown]</em></strong>:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-13-1">1</a></span>
+<span class="normal"><a href="#__codelineno-13-2">2</a></span>
+<span class="normal"><a href="#__codelineno-13-3">3</a></span>
+<span class="normal"><a href="#__codelineno-13-4">4</a></span>
+<span class="normal"><a href="#__codelineno-13-5">5</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1"></a>--- GET /unknown
+<a id="__codelineno-13-2" name="__codelineno-13-2"></a>1. Logger, kernel.request (before the routing)
+<a id="__codelineno-13-3" name="__codelineno-13-3"></a>[error] Uncaught PHP Exception Symfony\Component\HttpKernel\Exception\NotFoundHttpException: "No route found for "GET http://localhost:8000/unknown"" at RouterListener.php line 156
+<a id="__codelineno-13-4" name="__codelineno-13-4"></a>x. ErrorPage, kernel.exception (HTTP 404)
+<a id="__codelineno-13-5" name="__codelineno-13-5"></a>7. Logger, kernel.response (code 404)
+</code></pre></div></td></tr></table></div>
+<p>Das Routing ist fehlgeschlagen: kein Listener danach, keine Aktion. Die 404-Seite ist unsere eigene:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-14-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1"></a>curl http://localhost:8000/unknown
+</code></pre></div></td></tr></table></div>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-15-1">1</a></span>
+<span class="normal"><a href="#__codelineno-15-2">2</a></span>
+<span class="normal"><a href="#__codelineno-15-3">3</a></span>
+<span class="normal"><a href="#__codelineno-15-4">4</a></span>
+<span class="normal"><a href="#__codelineno-15-5">5</a></span>
+<span class="normal"><a href="#__codelineno-15-6">6</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1"></a>...
+<a id="__codelineno-15-2" name="__codelineno-15-2"></a>      &lt;div class="alert alert-danger"&gt;
+<a id="__codelineno-15-3" name="__codelineno-15-3"></a>    &lt;h1 class="h4"&gt;Error 404&lt;/h1&gt;
+<a id="__codelineno-15-4" name="__codelineno-15-4"></a>        &lt;p class="mb-0"&gt;Page not found.&lt;/p&gt;
+<a id="__codelineno-15-5" name="__codelineno-15-5"></a>  &lt;/div&gt;
+<a id="__codelineno-15-6" name="__codelineno-15-6"></a>...
+</code></pre></div></td></tr></table></div>
+<p>Konzentrieren wir uns auf das Wesentliche. Kernel-Ereignis-Listener sind der richtige Ort für Prüfungen, die vielen Aktionen gemeinsam sind (Ist der Benutzer angemeldet? Hat er die Berechtigung, auf diese Aktion zuzugreifen?): Sie bilden die Grundlage der Sicherheitskomponente von <em>[Symfony]</em>, die das nächste Kapitel für die Authentifizierung verwendet. Die Ereignis-Listener für <strong><em>[kernel.exception]</em></strong> und die Fehler-Views stellen sicher, dass der Benutzer unabhängig vom Fehler nie eine technische Seite sieht: Die Fallstudie macht sich das zunutze.</p>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner">
+
+      <div>
+        <a href="https://stahe.github.io" target="_blank">
+          https://stahe.github.io
+        </a>
+        <br>
+        Dieses Tutorial, geschrieben von der KI <strong>Claude</strong> von Anthropic im Auftrag von <strong>Serge Tahé</strong>, wird der Öffentlichkeit unter den Bedingungen der Lizenz
+        <em>Creative Commons Namensnennung – Nicht kommerziell –
+        Weitergabe unter gleichen Bedingungen 3.0 Unported</em> zur Verfügung gestellt.
+
+      </div>
+
+    </div>
+  </div>
+
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": ".", "features": ["navigation.sections", "navigation.indexes", "navigation.expand", "toc.integrate", "navigation.top"], "search": "assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+        <script src="javascripts/focus.js"></script>
+      
+    
+  </body>
+</html>

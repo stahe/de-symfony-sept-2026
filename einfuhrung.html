@@ -1,0 +1,1283 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Schritt-für-Schritt-Einführung in das Web-Framework [Symfony]">
+      
+      
+        <meta name="author" content="Serge Tahé">
+      
+      
+        <link rel="canonical" href="https://stahe.github.io/de-symfony-sept-2026/einfuhrung.html">
+      
+      
+        <link rel="prev" href="index.html">
+      
+      
+        <link rel="next" href="actions-routing-antworten.html">
+      
+      
+        
+      
+      
+      <link rel="icon" href="assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>1. Einführung - Schritt-für-Schritt-Einführung in das Web-Framework [Symfony]</title>
+      
+    
+    
+      <link rel="stylesheet" href="assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="stylesheets/focus.css">
+    
+      <link rel="stylesheet" href="stylesheets/bidi.css">
+    
+    <script>__md_scope=new URL(".",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-EBZC3JVJNR"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    var siteName = "Schritt-für-Schritt-Einführung in das Web-Framework [Symfony]";
+    gtag('config', 'G-EBZC3JVJNR', {
+        'page_title': siteName
+    });
+  </script>
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="purple">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#1-einfuhrung" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="index.html" title="Schritt-für-Schritt-Einführung in das Web-Framework [Symfony]" class="md-header__button md-logo" aria-label="Schritt-für-Schritt-Einführung in das Web-Framework [Symfony]" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Schritt-für-Schritt-Einführung in das Web-Framework [Symfony]
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              1. Einführung
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="purple"  aria-label="Zum dunklen Modus wechseln"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Zum dunklen Modus wechseln" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="blue" data-md-color-accent="purple"  aria-label="Zum hellen Modus wechseln"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Zum hellen Modus wechseln" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://stahe.github.io/de-symfony-sept-2026" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="index.html" title="Schritt-für-Schritt-Einführung in das Web-Framework [Symfony]" class="md-nav__button md-logo" aria-label="Schritt-für-Schritt-Einführung in das Web-Framework [Symfony]" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Schritt-für-Schritt-Einführung in das Web-Framework [Symfony]
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://stahe.github.io/de-symfony-sept-2026" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="index.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Willkommen
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1. Einführung
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="einfuhrung.html" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1. Einführung
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#11-die-rolle-von-symfony-in-einer-webanwendung" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1. Die Rolle von Symfony in einer Webanwendung
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#12-verwendete-werkzeuge" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2. Verwendete Werkzeuge
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#13-die-fallstudie-ausfuhren" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.3. Die Fallstudie ausführen
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1.3. Die Fallstudie ausführen">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#131-laragon-installieren" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.3.1. Laragon installieren
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#132-die-fallstudie-ausfuhren" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.3.2. Die Fallstudie ausführen
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#14-beispiele" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.4. Beispiele
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#15-inhalt-des-dokuments" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.5. Inhalt des Dokuments
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="actions-routing-antworten.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2. Actions, Routing, Antworten
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="das-action-modell.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    3. Das Action-Modell
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="die-view-und-ihr-modell.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    4. Die View und ihr Modell
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="internationalisierung.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    5. Internationalisierung
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="gultigkeitsbereiche-von-daten.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    6. Gültigkeitsbereiche von Daten
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="der-lebenszyklus-einer-anfrage.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    7. Der Lebenszyklus einer Anfrage
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="authentifizierung-und-autorisierung.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    8. Authentifizierung und Autorisierung
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="schichtenarchitektur-und-datenzugriff.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    9. Schichtenarchitektur und Datenzugriff
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="zwischenfazit.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    10. Zwischenfazit
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="fallstudie-die-anwendung-rdvmedecins.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    11. Fallstudie: Die Anwendung RdvMedecins
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="fazit.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    12. Fazit
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="anhange.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    13. Anhänge
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="1-einfuhrung">1. <span style="color: #2e74b5">Einführung</span></h1>
+<p>Das PDF des Dokuments finden Sie |<a href="https://1drv.ms/b/c/f53a919f43d27eb5/IQA9uz8NhSo6Sof8W88B5xNuAYPjqt5sfCGuTjmoia_ZkKE?e=ik3ZVF">HIER</a>|.</p>
+<p>Den Code des Dokuments finden Sie |<a href="https://1drv.ms/u/c/f53a919f43d27eb5/IQCV_gegEWBNTpK7jl-jESM7AeKT2p-BnOsrWnXGsdQYD18?e=I5uPSn">HIER</a>|.</p>
+<p>Dieses Dokument ist ein Produkt der KI Claude von Anthropic. Es folgt auf das Dokument <a href="https://stahe.github.io/de-laravel-sept-2026/"><u><span style="color: #0563c1">„Schritt-für-Schritt-Einführung in das Web-Framework [Laravel]</span></u></a>“ (2026), das seinerseits auf die Dokumente <a href="https://stahe.github.io/de-flask-sept-2026/"><u><span style="color: #0563c1">„Schritt-für-Schritt-Einführung in das Web-Framework [Flask]</span></u></a>“, <a href="https://stahe.github.io/de-springmvc-sept-2026/"><u><span style="color: #0563c1">„Schritt-für-Schritt-Einführung in das Web-Framework [Spring MVC]</span></u></a>“, „<a href="https://stahe.github.io/de-aspnetcoremvc-sept-2026/"><u><span style="color: #0563c1">Schritt-für-Schritt-Einführung in das Web-Framework [ASP.NET Core MVC]</span></u></a>“ und „<a href="https://stahe.github.io/de-nestjs-html-sept-2026/"><u><span style="color: #0563c1">Schritt-für-Schritt-Einführung in das Web-Framework [NestJS]</span></u></a>“ (2026) folgte. Dieses Dokument bleibt im <em>[PHP]</em>-Universum, wechselt aber das Framework:</p>
+<ul>
+<li>das Framework <em>[Laravel]</em> wird durch das Framework <em>[Symfony]</em> 8.1 ersetzt, weiterhin mit der Sprache <em>[PHP]</em> (Version 8.4 oder höher);</li>
+<li>die <em>[Blade]</em>-Views werden durch <em>[Twig]</em>-Views ersetzt, die View-Engine von <em>[Symfony]</em>;</li>
+<li>die Validierung mit den Regeln von <em>[Laravel]</em> und den Formularanfragen (<strong><em>[FormRequest]</em></strong>) wird durch die Komponente <strong>Validator</strong> von <em>[Symfony]</em> (<strong>Constraints</strong>, geschrieben als <em>[PHP]</em>-Attribute) und durch deren Komponente <strong>Form</strong> ersetzt, die Formulare mithilfe von Klassen beschreibt;</li>
+<li>die Guards, Middleware und <strong><em>[Gate]</em></strong>-Komponenten von <em>[Laravel]</em> werden durch die Komponente <strong>Security</strong> von <em>[Symfony]</em> ersetzt: Firewalls, Authenticators, Rollen, Passwort-Hashing und ein Versuchsbegrenzer, ergänzt durch die Bibliothek <em>[firebase/php-jwt]</em> für JWT-Token;</li>
+<li>Middleware-Komponenten gibt es in <em>[Symfony]</em> dagegen nicht: <strong>Event-Listener</strong> dienen dazu, in die Verarbeitung der Anfrage einzugreifen;</li>
+<li>der ORM <em>[Eloquent]</em> wird durch <em>[Doctrine]</em> ersetzt, einen ORM, der auf <em>[Symfony]</em> aufbaut, das wiederum auf <em>[MySQL]</em> aufsetzt.</li>
+</ul>
+<p>Das Dokument folgt eng der Struktur des Kurses zu <em>[Laravel]</em>: zunächst zahlreiche kleine Projekte, die jeweils auf ein einziges Konzept ausgerichtet sind, danach eine umfassende Fallstudie – eine Webanwendung zur Terminverwaltung in einer Arztpraxis – mit vollständig kommentierten Dateien. Die Beispiele tragen dieselben Nummern und behandeln dieselben Themen wie in den Kursen <em>[Laravel]</em>, <em>[Flask]</em>, <em>[Spring MVC],</em> und <em>[ASP.NET Core MVC]</em>: Wer einen dieser Kurse kennt, kann die Frameworks Beispiel für Beispiel vergleichen. Das ist jedoch nicht erforderlich: Dieses Dokument ist in sich abgeschlossen und setzt keine Vorkenntnisse dieser Frameworks voraus. Die einzigen Voraussetzungen sind Grundkenntnisse der Webprogrammierung (das Protokoll HTTP, die Sprache HTML) und die Grundlagen der Sprache <em>[PHP]</em> (Variablen, Arrays, Funktionen, Klassen). Der Kurs <a href="https://stahe.github.io/php7-juillet-2019/"><u><span style="color: #0563c1">„Einführung in die Sprache PHP7 anhand von Beispielen“</span></u></a> (2019) führt für alle, die sie zuerst lernen müssen, in die Sprache selbst ein; die hier verwendeten Neuerungen von <em>[PHP]</em> 8 (Promoted Properties, <strong><em>[readonly]</em></strong>-Klassen, Attribute, Enumerationen, benannte Argumente, der Null-Safe-Operator usw.) werden erklärt, sobald sie zum ersten Mal auftreten.</p>
+<h2 id="11-die-rolle-von-symfony-in-einer-webanwendung">1.1. <span style="color: #2e74b5">Die Rolle von Symfony in einer Webanwendung</span></h2>
+<p>Eine Webanwendung wird häufig in Schichten aufgebaut, wobei jede Schicht nur mit den benachbarten Schichten kommuniziert:</p>
+<p><img src="images/10000000000003E80000014AA97880A9.png" width="605" height="200" style="width:16cm;height:5.279cm;" alt="Image" class="odt-zoomable" data-zoom-src="images/10000000000003E80000014AA97880A9.png" /></p>
+<ul>
+<li>Die Web-Schicht empfängt HTTP-Anfragen vom Browser und liefert ihm HTML-Seiten zurück. Dies ist die Schicht, bei deren Entwicklung uns <em>[Symfony]</em> hilft;</li>
+<li>die Geschäftsschicht enthält die Geschäftsregeln der Anwendung (z. B. „Ein Patient darf nur einen künftigen Termin haben“). Sie weiß nichts über das Web: Sie könnte ebenso gut eine Kommandozeilenanwendung bedienen;</li>
+<li>die Datenzugriffsschicht (DAO-Schicht, von <em>Data Access Object</em>) liest aus der Datenbank und schreibt in sie. Wir verwenden <em>[Doctrine]</em>, den zu <em>[Symfony]</em> gehörenden ORM (<em>Object Relational Mapper</em>), der Tabellenzeilen auf <em>[PHP]</em>-Objekte abbildet.</li>
+</ul>
+<p>Die Web-Schicht selbst folgt dem Muster MVC (<em>Model-View-Controller</em>):</p>
+<ul>
+<li>der Controller (C) ist eine <em>[PHP]</em>-Klasse, deren Methoden, <strong>Actions</strong> genannt, jeweils eine bestimmte Art von Anfrage bearbeiten (zum Beispiel <strong><em>[GET /schedule]</em></strong>). Eine Action liest die Anfrageparameter, verarbeitet die Anfrage über die Geschäftsschicht und wählt anschließend die anzuzeigende View aus;</li>
+<li>das Modell (M) ist die Menge der Daten, die die Action an die View übergibt;</li>
+<li>die View (V) ist eine <em>[Twig]</em>-Datei (Erweiterung <strong><em>[.html.twig]</em></strong>): eine HTML-Seite, die Ausdrücke wie <strong><em>[{{ ... }}]</em></strong> und Anweisungen wie <strong><em>[{% if %}]</em></strong>, <strong><em>[{% for %}]</em></strong>... enthält, die die <em>[Twig]</em>-Engine durch Daten des Modells ersetzt.</li>
+</ul>
+<p>Ein Hinweis zur Terminologie, um Verwechslungen zu vermeiden: In <em>[Symfony]</em> heißen die Klassen, die Datenbanktabellen repräsentieren, <strong>Entitäten</strong> (Ordner <strong><em>[src/Entity]</em></strong>). In diesem Dokument bezeichnet der Begriff <strong>„Modell“</strong> daher stets das <strong>View-Modell</strong> (die an eine View übergebenen Daten) oder, in Kapitel 2, das <strong>Action-Modell</strong> (die Daten, die sie empfängt). Der Begriff <strong>„Template“</strong> bezeichnet die gemeinsame View, von der andere Seiten erben (Kapitel über Views).</p>
+<p>Die Verarbeitung einer Anfrage folgt den nummerierten Schritten im Diagramm:</p>
+<ul>
+<li>1: Der Browser sendet eine HTTP-Anfrage, zum Beispiel <strong><em>[GET /schedule?doctorId=1&amp;day=2026-09-26]</em></strong>;</li>
+<li>2: Der Webserver empfängt die Anfrage und übergibt sie an die Anwendung <em>[Symfony]</em> über die Datei <strong><em>[public/index.php]</em></strong>. Während der Entwicklung ist dies der in <em>[PHP]</em> enthaltene Server, gestartet mit dem Befehl <strong><em>[php -S localhost:8000 -t public]</em></strong>; in der Produktion ist es ein Server wie <em>[nginx]</em> oder <em>[Apache]</em>, in Verbindung mit <em>[PHP-FPM]</em>. Die Datei <strong><em>[public/index.php]</em></strong> übergibt die Anfrage an den <strong>Kernel</strong> (<em>Kernel</em>) der Anwendung, der sie durch eine Reihe von <strong>Ereignissen</strong> leitet: Beteiligt sind Klassen von <em>[Symfony]</em> und der Anwendung sowie <strong>Listener</strong> (Session, Sicherheit, Sprache usw.). Einer von ihnen vergleicht den angeforderten Pfad mit den Routen der Anwendung und wählt die für diese Anfrage zuständige Action aus: Dies ist das <strong>Routing</strong>;</li>
+<li>3: Die Action fordert die benötigten Daten von der Geschäftsschicht an; falls nötig, wendet sich die Geschäftsschicht an die DAO-Schicht, die die Datenbank <em>[MySQL]</em> per SQL abfragt;</li>
+<li>4: Die Action erstellt das Modell M der View und weist die Engine <em>[Twig]</em> an, die Seite zu erzeugen (Methode <strong><em>[render]</em></strong>);</li>
+<li>5: Die von der View erzeugte HTML-Seite ist die Antwort der Action, die <em>[Symfony]</em> an den Browser zurückgibt.</li>
+</ul>
+<p><em>[Symfony]</em> ist neben <em>[Laravel]</em> eines der beiden großen Web-Frameworks der <em>[PHP]</em>-Welt. Es ist frei und quelloffen, wurde 2005 von Fabien Potencier (und der französischen Firma SensioLabs) geschaffen und läuft überall dort, wo <em>[PHP]</em>  läuft (<em>[Windows]</em>, <em>[Linux]</em>, <em>[macOS]</em>), und <em>[PHP]</em> funktioniert bei fast allen Webhosting-Anbietern. <em>[Symfony]</em> ist in erster Linie eine Sammlung von etwa fünfzig <strong>Komponenten</strong> – eigenständigen Bibliotheken (HTTP-Anfragen und -Antworten, Routing, Konsole, Formulare, Validierung, Sicherheit usw.) –, die so angesehen sind, dass andere Projekte sie verwenden: <em>[Laravel]</em> selbst baut auf mehreren von ihnen auf, und Leser des vorherigen Kurses sind ihnen bereits begegnet. Das Framework <em>[Symfony]</em>  fügt diese Komponenten mithilfe von <strong>Bundles</strong>  (Integrationspaketen) und einem <strong>Service-Container</strong>  zusammen, der die Objekte der Anwendung erzeugt. Im Vergleich zu <em>[Laravel]</em> <em>[Symfony]</em> trifft klare Entscheidungen: keine Fassaden oder globalen Funktionen, sondern per Dependency Injection bezogene Services; explizite Konfiguration in YAML-Dateien; <em>[PHP]</em>-Attribute (<strong><em>[#[Route]]</em></strong>, <strong><em>[#[Assert\NotBlank]]</em></strong>...) zur Beschreibung des Codes; ein ORM, nämlich <em>[Doctrine]</em>, der Objekte von ihrer Speicherung trennt. Es ist ein Framework, das für seine Strenge, seine Dokumentation und seine Versionierungsrichtlinie bekannt ist: alle sechs Monate eine Minor-Version, alle zwei Jahre eine Version mit „Long-Term Support“ und die Garantie, dass eine Anwendung ohne Warnungen zu veralteten Funktionen ohne Änderung auf die nächste Hauptversion umsteigen kann. <em>[Symfony]</em> kann Server erstellen, die JSON an einen <em>[JavaScript]</em>-Client liefern (<em>[Angular]</em>, <em>[React]</em>, <em>[Vue.js]</em>, [Flutter]...), ebenso wie klassische Webanwendungen, bei denen der Server die HTML-Seiten erzeugt und der Browser sie lediglich anzeigt. Dieser zweite Anwendungsfall ist Gegenstand dieses Dokuments.</p>
+<p>Eine Besonderheit von <em>[PHP]</em> erklärt vieles an <em>[Symfony]</em>: Die Anwendung wird <strong>bei jeder Anfrage neu aufgebaut</strong>  und anschließend verworfen (Beispiel 01). <em>[Symfony]</em> gleicht diesen Aufwand aus, indem es <strong>seine Konfiguration</strong> ein für alle Mal in <em>[PHP]</em>-Code kompiliert, der in einem <strong>Cache</strong>  (Ordner <strong><em>[var/cache]</em></strong>) abgelegt wird. Darauf kommen wir häufig zurück.</p>
+<h2 id="12-verwendete-werkzeuge">1.2. <span style="color: #2e74b5">Verwendete Werkzeuge</span></h2>
+<p>Die Beispiele wurden mit den folgenden Werkzeugen geschrieben und getestet (ihre Installation wird im Anhang beschrieben):</p>
+<ul>
+<li><em>[PHP]</em> 8.4 (jede Version ab 8.4 ist geeignet), mit den Erweiterungen <strong><em>[intl]</em></strong>, <strong><em>[mbstring]</em></strong>, <strong><em>[openssl],</em></strong> und <strong><em>[pdo_mysql]</em></strong>;</li>
+<li><em>[Composer]</em> 2, der Bibliotheksmanager für <em>[PHP]</em>;</li>
+<li>der Editor <em>[Visual Studio Code]</em> mit den Erweiterungen <em>[PHP Intelephense]</em> (Codeanalyse), <em>[Twig Language 2]</em> (Views) und <em>[YAML]</em> (Konfigurationsdateien);</li>
+<li>ein moderner Browser (<em>[Chrome]</em>, <em>[Firefox]</em>, <em>[Edge]</em>);</li>
+<li>das Kommandozeilenwerkzeug <em>[curl]</em>, das die rohen HTTP-Antworten anzeigt (es ist in <em>[Windows]</em> 10 und 11 enthalten);</li>
+<li>ein DBMS, <em>[MySQL]</em> (oder <em>[MariaDB]</em>), zum Beispiel das von <em>[Laragon]</em> unter <em>[Windows]</em>, ab dem Kapitel über den Datenzugriff und für die Fallstudie. Unter <em>[Windows]</em> installiert <em>[Laragon]</em>  <em>[PHP]</em>, <em>[Composer],</em> und <em>[MySQL]</em> in einem Zug.</li>
+</ul>
+<p><em>[Symfony]</em> und die übrigen Bibliotheken sind nicht Teil von <em>[PHP]</em>: <em>[Composer]</em> lädt sie bei der Installation aus dem Repository <em>[Packagist]</em> herunter (Sie müssen an diesem Tag also mit dem Internet verbunden sein) und legt sie in einem Ordner <strong><em>[vendor]</em></strong> ab. Jedes Projekt beschreibt seine Bibliotheken in einer Datei <strong><em>[composer.json]</em></strong>. Die folgende Tabelle listet die wichtigsten auf, zusammen mit den verwendeten Versionen:</p>
+<table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top; text-align: left;"><div style="margin:0 0 0.5em 0"><i>[symfony/framework-bundle]</i></div></td><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top; text-align: left;"><div style="margin:0 0 0.5em 0">das Framework: Kern, Routing, Controller, Service-Container, Konfiguration, Session, Cache; es installiert die benötigten Komponenten (<i><b>[symfony/http-foundation]</b></i>, <i><b>[symfony/http-kernel]</b></i>, <i><b>[symfony/routing]</b></i>, <i><b>[symfony/dependency-injection]</b></i>...)</div></td><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top; text-align: left;"><div style="margin:0 0 0.5em 0">8.1.7</div></td></tr><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top; text-align: left;"><div style="margin:0 0 0.5em 0"><i>[symfony/twig-bundle]</i>, <i>[twig/twig]</i></div></td><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top; text-align: left;"><div style="margin:0 0 0.5em 0">die <i>[Twig] </i>-Views (Kapitel über Views)</div></td><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top; text-align: left;"><div style="margin:0 0 0.5em 0">8.1.7, 3.30.0</div></td></tr><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top; text-align: left;"><div style="margin:0 0 0.5em 0"><i>[symfony/validator]</i>, <i>[symfony/form]</i></div></td><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top; text-align: left;"><div style="margin:0 0 0.5em 0">Validierung (ab Beispiel 08) und Formulare (ab Beispiel 17)</div></td><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top; text-align: left;"><div style="margin:0 0 0.5em 0">8.1.7</div></td></tr><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top; text-align: left;"><div style="margin:0 0 0.5em 0"><i>[symfony/security-bundle]</i></div></td><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top; text-align: left;"><div style="margin:0 0 0.5em 0">Authentifizierung und Autorisierung (Kapitel Sicherheit)</div></td><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top; text-align: left;"><div style="margin:0 0 0.5em 0">8.1.7</div></td></tr><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top; text-align: left;"><div style="margin:0 0 0.5em 0"><i>[symfony/translation]</i></div></td><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top; text-align: left;"><div style="margin:0 0 0.5em 0">Übersetzungen (Beispiele 09 und 22)</div></td><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top; text-align: left;"><div style="margin:0 0 0.5em 0">8.1.7</div></td></tr><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top; text-align: left;"><div style="margin:0 0 0.5em 0"><i>[doctrine/orm]</i>, <i>[doctrine/dbal]</i>, <i>[doctrine/doctrine-bundle]</i></div></td><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top; text-align: left;"><div style="margin:0 0 0.5em 0">Datenbankzugriff (Beispiel 28 und Fallstudie)</div></td><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top; text-align: left;"><div style="margin:0 0 0.5em 0">3.7.2, 4.5.0, 3.3.2</div></td></tr><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top; text-align: left;"><div style="margin:0 0 0.5em 0"><i>[firebase/php-jwt]</i></div></td><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top; text-align: left;"><div style="margin:0 0 0.5em 0">JWT-Token (Kapitel Authentifizierung)</div></td><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top; text-align: left;"><div style="margin:0 0 0.5em 0">7.2.0</div></td></tr></table>
+
+<p><em>[Symfony]</em> wird üblicherweise installiert, indem ein vollständiges Projekt mit dem folgenden Befehl erstellt wird:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1"></a>composer create-project symfony/skeleton my-project
+</code></pre></div></td></tr></table></div>
+<p>oder mit dem Kommandozeilenwerkzeug von <em>[Symfony]</em> (dem Programm <strong><em>[symfony]</em></strong>; siehe Anhänge): <strong><em>[symfony new my-project --webapp]</em></strong>. <em>[Composer]</em> lädt dann das <strong>Skeleton</strong>  einer <em>[Symfony]</em>-Anwendung herunter, anschließend deren Bibliotheken. Das Skeleton enthält außerdem <em>[Symfony Flex]</em>, ein Plugin für <em>[Composer]</em>, das jedes Mal, wenn eine Bibliothek (<strong><em>[composer require twig]</em></strong>) installiert wird, deren eigene Konfigurationsdateien anhand online veröffentlichter <strong>Vorlagen</strong>  schreibt. So beginnt man ein echtes Projekt. Zu Lernzwecken hat dieses Vorgehen einen Nachteil: Die Dateien erscheinen von selbst, ohne dass Sie wissen, wozu sie dienen. Die Beispiele in diesem Dokument beginnen daher am anderen Ende: Beispiel 01 ist die kleinstmögliche <em>[Symfony]</em>-Anwendung, und jedes Beispiel fügt nur die Dateien hinzu, die es benötigt, von Hand geschrieben und kommentiert. Die Fallstudie am Ende folgt der Struktur einer üblichen <em>[Symfony]</em>-Anwendung.</p>
+<h2 id="13-die-fallstudie-ausfuhren">1.3. <span style="color: #2e74b5">Die Fallstudie ausführen</span></h2>
+<h3 id="131-laragon-installieren">1.3.1. <span style="color: #4f81bd">Laragon installieren</span></h3>
+<p>Die Fallstudie benötigt ein DBMS, MySQL, einen PHP-Interpreter sowie PHP und das Paketinstallationsprogramm [composer]. Laragon kann all das und mehr bereitstellen. Im September 2026 ist Laragon unter der URL <em>[Download Laragon – Fast &amp; Modern Dev Environment ]</em> verfügbar. Laragon bringt Werkzeuge mit, mit denen sich ein PHP-Server, das DBMS und <em>[MySQL]</em> installieren lassen:</p>
+<p><img src="images/10000000000006440000030C86481A8B.png" width="643" height="312" style="width:17cm;height:8.266cm;" alt="Image" class="odt-zoomable" data-zoom-src="images/10000000000006440000030C86481A8B.png" /></p>
+<ul>
+<li>in [1] ein Apache-Webserver;</li>
+<li>in [2] das DBMS und <em>[MySQL]</em>;</li>
+<li>in [3] ein Nachrichtenwerkzeug, das wir nicht verwenden werden;</li>
+<li>[4] startet alle Dienste (Apache, <em>[MySQL]</em>, MailPit);</li>
+<li>[5] zeigt die Webseite der URL <em>[http://localhost]</em> an. Standardmäßig verweist diese URL auf den Ordner &lt;laragon-install&gt;\www, wobei &lt;laragon-install&gt; der Installationsordner von Laragon ist;</li>
+<li>in [6] wird das Werkzeug HeidiSQL gestartet, mit dem sich MySQL-Datenbanken verwalten lassen. Wir verwenden dieses Werkzeug, um die von der Fallstudie genutzte Datenbank zu erstellen;</li>
+<li>in [7] wird ein Terminal geöffnet; alle für Laragon nötigen Binärdateien befinden sich im PATH;</li>
+<li>in [8] wird ein Windows-Explorer-Fenster im Ordner geöffnet, der zur URL <em>[http://localhost]</em> gehört;</li>
+</ul>
+<p>Der Installationsordner von Laragon enthält die folgenden Elemente:</p>
+<table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top; text-align: left;"><img src="images/10000000000002DB00000324CA05B23E.png" width="314" height="345" style="display:inline-block; margin:4px;width:8.306cm;height:9.133cm;" class="odt-zoomable" data-zoom-src="images/10000000000002DB00000324CA05B23E.png" /></td><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top; text-align: left;">&nbsp;</td></tr></table>
+
+<ul>
+<li>In [1] enthält der Ordner <em>[bin]</em> zahlreiche Anwendungen:</li>
+</ul>
+<table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top; text-align: left;"><img src="images/1000000000000329000004CE02139058.png" width="404" height="615" style="display:inline-block; margin:4px;width:10.7cm;height:16.27cm;" class="odt-zoomable" data-zoom-src="images/1000000000000329000004CE02139058.png" /></td></tr></table>
+
+<ul>
+<li>In [1] der Apache-Webserver;</li>
+<li>in [2] ein Kommandozeilenterminal;</li>
+<li>in [3] ein <em>[git]</em>-Client, mit dem Sie verschiedene Versionen eines Projekts verwalten können;</li>
+<li>in [4] ein Datenbankmanager;</li>
+<li>in [5] ein Mailmanager;</li>
+<li>in [6] das DBMS und <em>[MySQL]</em>;</li>
+<li>[7], ein weiterer Webserver;</li>
+<li>in [8] <em>[node.js]</em> zum Ausführen von JavaScript-Skripten;</li>
+<li>[9], ein Texteditor;</li>
+<li>[10], der PHP-Interpreter;</li>
+<li>[11], der <em>[Python]</em>-Interpreter;</li>
+<li>[12], ein Cache-Server;</li>
+</ul>
+<p>Laragon liefert eine umfassende Entwicklungsumgebung mit. In diesem Kurs verwenden wir:</p>
+<ul>
+<li>das DBMS, <em>[MySQL],</em> [6], und das Werkzeug <em>[heidisql]</em> für die grafische Verwaltung;</li>
+<li>den PHP-8.5-Interpreter;</li>
+<li>das Paketinstallationsprogramm [composer];</li>
+</ul>
+<p>Die README der Fallstudie gibt an, dass Sie in einem Terminal die folgenden Befehle eingeben müssen:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>composer install
+</code></pre></div>
+<p>um die für die Beispiele und die Fallstudie erforderlichen PHP-Pakete zu installieren.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>php -S localhost:8000 -t public
+</code></pre></div>
+<p>um entweder eines der Beispiele oder die Fallstudie auszuführen. Wenn Sie ein [PowerShell]-Terminal in VSCode verwenden, stoßen Sie auf das folgende Problem: Weder [composer] noch [php] befinden sich nach der Installation von Laragon im PATH des Windows-Rechners. Diese Befehle werden daher in einem VSCode-Terminal nicht erkannt.</p>
+<p>Um [composer] und [php] in den PATH des Windows-Rechners aufzunehmen, öffnen Sie ein PowerShell-Terminal im Modus [administrator] und geben dann die folgenden Befehle ein:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>[Environment]::SetEnvironmentVariable("Path",[Environment]::GetEnvironmentVariable("Path", "Machine") + ";C:\laragon\bin\composer","Machine")
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>[Environment]::SetEnvironmentVariable("Path",[Environment]::GetEnvironmentVariable("Path", "Machine") + ";C:\laragon\bin\php\php-8.5.11-nts-Win32-vs17-x64","Machine")
+</code></pre></div>
+<p>Passen Sie die beiden hervorgehobenen Pfade an Ihre Umgebung an.</p>
+<p>Sie müssen VSCode neu starten, damit diese Änderungen wirksam werden.</p>
+<p>Um die für die Fallstudie erforderliche <em>[MySQL]</em>-Datenbank zu erstellen, gehen Sie wie folgt vor:</p>
+<table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top; text-align: left;"><img src="images/10000000000006440000030C352A3F89.png" width="503" height="244" style="display:inline-block; margin:4px;width:13.301cm;height:6.468cm;" class="odt-zoomable" data-zoom-src="images/10000000000006440000030C352A3F89.png" /></td><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top; text-align: left;">&nbsp;</td></tr></table>
+
+<ul>
+<li>In [1] müssen alle Dienste gestartet sein;</li>
+<li>in [2] ermöglicht die Option <em>[Database]</em> die Verwaltung der Datenbank;</li>
+</ul>
+<p>Die Option <em>[Database]</em> startet ein Hilfsprogramm namens HeidiSQL:</p>
+<table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top; text-align: left;"><img src="images/10000000000008D2000003C91FBD37B4.png" width="621" height="266" style="display:inline-block; margin:4px;width:16.431cm;height:7.05cm;" class="odt-zoomable" data-zoom-src="images/10000000000008D2000003C91FBD37B4.png" /></td></tr></table>
+
+<ul>
+<li>In [1] können Sie verschiedene DBMS-Optionen auswählen. Der vorgegebene Wert ist das DBMS MySQL. Das ist in Ordnung;</li>
+<li>in [2] melden Sie sich bei HeidiSQL an;</li>
+</ul>
+<table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top; text-align: left;"><img src="images/10000000000003FD0000018A35CBA47C.png" width="357" height="138" style="display:inline-block; margin:4px;width:9.449cm;height:3.649cm;" class="odt-zoomable" data-zoom-src="images/10000000000003FD0000018A35CBA47C.png" /></td><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top; text-align: left;"><img src="images/10000000000002A4000001C70316A390.png" width="237" height="159" style="display:inline-block; margin:4px;width:6.26cm;height:4.21cm;" class="odt-zoomable" data-zoom-src="images/10000000000002A4000001C70316A390.png" /></td></tr></table>
+
+<ul>
+<li>Führen Sie in [1-2] die SQL-Datei aus und wählen Sie dann die Datei <em>[dbrdvmedecins2.sql]</em> aus, die Sie im Ordner <em>[symfony-sept-2026/rdvmedecins2-symfony/database] finden</em>:</li>
+</ul>
+<p><img src="images/10000000000001D7000001F897B5F6F5.png" width="198" height="212" style="width:5.226cm;height:5.6cm;" alt="Image" class="odt-zoomable" data-zoom-src="images/10000000000001D7000001F897B5F6F5.png" /></p>
+<p>Das Ausführen der Datei [3] erstellt die von der Fallstudie genutzte Datenbank <em>[dbrdvmedecins2]</em>. Um sie anzuzeigen, drücken Sie in HeidiSQL F5, um die Anzeige zu aktualisieren:</p>
+<p><strong>Anmerkung der Redaktion</strong>: Die folgenden Screenshots zeigen eine Datenbank namens [dbrdvmedecins], während die Datenbank der Fallstudie [dbrdvmedecins2] heißt. Die beiden Datenbanken sind nahezu identisch, daher hielten wir neue Screenshots für unnötig.</p>
+<p><strong>Ende der Anmerkung</strong></p>
+<p><img src="images/10000000000002A50000031EFB250513.png" width="213" height="250" style="width:5.639cm;height:6.609cm;" alt="Image" class="odt-zoomable" data-zoom-src="images/10000000000002A50000031EFB250513.png" /></p>
+<p>Die Datenbank <em>[dbrdvmedecins]</em> wurde erstellt. Ihr Inhalt:</p>
+<p><img src="images/100000000000053F00000271DC17B512.png" width="602" height="280" style="width:15.921cm;height:7.408cm;" alt="Image" class="odt-zoomable" data-zoom-src="images/100000000000053F00000271DC17B512.png" /></p>
+<ul>
+<li>in [1-3] die Tabelle <em>[clients]</em>;<ul>
+<li><em>[id]</em> ist der Primärschlüssel der Tabelle;</li>
+<li><em>[version]</em> ist die Versionsnummer der Zeile. Diese Nummer wird bei jeder Änderung der Zeile erhöht;</li>
+<li><em>[titre, nom, prenom]</em> identifizieren die Person;</li>
+</ul>
+</li>
+</ul>
+<p><img src="images/100000000000052A0000026BD3179386.png" width="602" height="282" style="width:15.921cm;height:7.454cm;" alt="Image" class="odt-zoomable" data-zoom-src="images/100000000000052A0000026BD3179386.png" /></p>
+<ul>
+<li>in [1-3] die Tabelle <em>[medecins]</em>;<ul>
+<li><em>[id]</em> ist der Primärschlüssel der Tabelle;</li>
+<li><em>[version]</em> ist die Versionsnummer der Zeile;</li>
+<li><em>[titre, nom, prenom]</em> identifizieren die Person;</li>
+</ul>
+</li>
+</ul>
+<p><img src="images/10000000000005FE000002C6FB6943F4.png" width="602" height="278" style="width:15.921cm;height:7.368cm;" alt="Image" class="odt-zoomable" data-zoom-src="images/10000000000005FE000002C6FB6943F4.png" /></p>
+<ul>
+<li>In [1-3] die Tabelle der Terminzeitfenster der Ärzte:<ul>
+<li><em>[id]</em>: Primärschlüssel;</li>
+<li><em>[version]</em>: Versionsnummer der Zeile;</li>
+<li><em>[id-medecin]</em>: Fremdschlüssel, der auf den Primärschlüssel des Arztes verweist;</li>
+<li><em>[hdebut, mdebut]</em>: Stunde und Minuten des Terminbeginns. So bedeutet <em>[8,20]</em> 8:20 Uhr.</li>
+<li><em>[hfin, mfin]</em>: Stunde und Minuten des Endes der Sprechstunde. </li>
+</ul>
+</li>
+</ul>
+<p><img src="images/10000000000005EB0000024E23D6EF19.png" width="602" height="234" style="width:15.921cm;height:6.198cm;" alt="Image" class="odt-zoomable" data-zoom-src="images/10000000000005EB0000024E23D6EF19.png" /></p>
+<ul>
+<li>In [1-3] die Tabelle <em>[rv]</em> der vereinbarten Termine;<ul>
+<li><em>[id]</em>: Primärschlüssel;</li>
+<li><em>[version]</em>: Versionsnummer;</li>
+<li><em>[jour]</em>: Datum des Termins;</li>
+<li><em>[id_creneau]</em>: Fremdschlüssel, der auf den Primärschlüssel des Terminzeitfensters verweist. Da ein Zeitfenster mit einem Arzt verknüpft ist, wissen wir, welcher Arzt diesen Termin wahrnimmt;</li>
+<li><em>[id_client]</em>: Fremdschlüssel auf die Nummer (den Primärschlüssel) des Patienten, der zum Termin kommt;</li>
+</ul>
+</li>
+</ul>
+<p><img src="images/100000000000066300000266A61EA136.png" width="602" height="226" style="width:15.921cm;height:5.978cm;" alt="Image" class="odt-zoomable" data-zoom-src="images/100000000000066300000266A61EA136.png" /></p>
+<ul>
+<li>in [1-3] listet die Tabelle <em>[users]</em> die Benutzer auf, die die Anwendung RdvMedecins nutzen dürfen;<ul>
+<li><em>[id, version]</em>: Primärschlüssel, Versionsnummer;</li>
+<li><em>[login, password]</em>: Zugangsdaten des Benutzers;</li>
+<li><em>[nom]</em>: Name des Benutzers;</li>
+<li><em>[role]</em>: die Rolle des Benutzers. <em>[ADMIN]</em> hat uneingeschränkte Zugriffsrechte. <em>[USER]</em> hat nur Lesezugriff. Dieser Benutzer kann den Terminkalender eines Arztes einsehen, aber keinen Termin vereinbaren oder absagen;</li>
+</ul>
+</li>
+</ul>
+<h3 id="132-die-fallstudie-ausfuhren">1.3.2. <span style="color: #4f81bd">Die Fallstudie ausführen</span></h3>
+<p><strong>Anmerkung des Korrektors</strong>: Ich rate dem Leser, die Fallstudie sofort wie unten beschrieben auszuführen. Sobald Sie den Zweck dieser Anwendung zur Terminverwaltung vollständig verstanden haben, bitten Sie Ihre bevorzugte KI, die Anwendung wie folgt zu ändern: Von nun an kann jeder Arzt:</p>
+<ul>
+<li>seine eigenen Terminzeitfenster zwischen zwei Daten festlegen. So kann er seinen Terminkalender nach Bedarf anpassen;</li>
+<li>bestimmte Zeitfenster für einen bestimmten Tag aus dem Kalender entfernen – zum Beispiel, wenn er aus persönlichen Gründen nicht verfügbar ist;</li>
+</ul>
+<p>Die Änderung ist nicht trivial, da sie eine Änderung der Datenbankstruktur erfordert. Bitten Sie die KI, Ihnen den neuen Anwendungscode und das SQL-Skript zur Erstellung der neuen Datenbank zu liefern. Dazu müssen Sie ihr die ZIP-Datei mit dem vollständigen Projekt sowie das SQL-Skript der alten Datenbank übergeben.</p>
+<p>Außerdem habe ich den von <strong>Claude</strong> erstellten Kurs nicht durchgesehen. Er hatte bereits die Kurse [NestJS], [ASP.NET Core MVC], [Spring MVC] und [Flask] erstellt, die allesamt perfekt waren. Ich bin davon ausgegangen, dass das auch hier der Fall ist. Wenn Sie beim Verständnis auf ein Problem stoßen, ist die Lösung immer dieselbe: Bitten Sie Ihre bevorzugte KI, Ihnen zu erklären, was Sie nicht verstehen. <strong>Claude</strong> beispielsweise ist darin sehr gut. Möglicherweise müssen Sie das Beispiel, das Sie nicht verstehen, zu ihm „hochladen“.</p>
+<p><strong>Ende der Anmerkung</strong>.</p>
+<p>Die Fallstudie am Ende dieses Dokuments ist eine vollständige Anwendung. Leser werden sie vermutlich in Aktion sehen wollen, bevor sie sich in die Details des Frameworks vertiefen: So führen Sie sie aus. Sie befindet sich im Ordner <strong><em>[rdvmedecins2-symfony]</em></strong>, neben dem Ordner <strong><em>[examples]</em></strong>:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-5-1">1</a></span>
+<span class="normal"><a href="#__codelineno-5-2">2</a></span>
+<span class="normal"><a href="#__codelineno-5-3">3</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1"></a>symfony-sept-2026/
+<a id="__codelineno-5-2" name="__codelineno-5-2"></a>├── examples/
+<a id="__codelineno-5-3" name="__codelineno-5-3"></a>└── rdvmedecins2-symfony/
+</code></pre></div></td></tr></table></div>
+<p>Sie müssen <em>[PHP]</em>  (Version 8.4 oder höher), <em>[Composer]</em>, <em>[Visual Studio Code]</em> und <em>[MySQL]</em>  installiert haben (siehe Anhänge). Dann:</p>
+<ul>
+<li><strong>Erstellen Sie die Datenbank</strong> <strong><em>[dbrdvmedecins2]</em></strong> <strong>,</strong> indem Sie das Skript <strong><em>[rdvmedecins2-symfony/database/dbrdvmedecins2.sql]</em></strong> ausführen. Mit <em>[Laragon]</em> öffnen Sie das Werkzeug <em>[HeidiSQL]</em> (Schaltfläche Database) und führen das Skript über das Menü File / Run SQL aus. Auf der Kommandozeile, im Ordner <strong><em>[rdvmedecins2-symfony]</em></strong>:</li>
+</ul>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-6-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1"></a>mysql -u root &lt; database/dbrdvmedecins2.sql
+</code></pre></div></td></tr></table></div>
+<ul>
+<li><strong>Öffnen Sie den Ordner</strong> <strong><em>[rdvmedecins2-symfony]</em></strong>  in <em>[Visual Studio Code]</em> (Menü File / Open Folder) und öffnen Sie dann ein Terminal (Menü Terminal / New Terminal);</li>
+<li><strong>Installieren Sie die</strong> Bibliotheken <strong>der Anwendung</strong>: <em>[Composer]</em> liest die Datei <strong><em>[composer.json]</em></strong>, lädt <em>[Symfony]</em> und die übrigen Bibliotheken herunter und legt sie im Ordner <strong><em>[vendor]</em></strong> der Anwendung ab (dauert einige Dutzend Sekunden):</li>
+</ul>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-7-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1"></a>composer install
+</code></pre></div></td></tr></table></div>
+<ul>
+<li><strong>Prüfen Sie die Verbindung zur Datenbank</strong>. Die Anwendung verbindet sich mit <em>[MySQL]</em> auf <strong><em>[127.0.0.1]</em></strong>, Port 3306, mit dem Benutzer <strong><em>[root]</em></strong> <strong>ohne Passwort</strong> (den Standardeinstellungen von <em>[Laragon]</em>). Wenn Ihr Konto <strong><em>[root]</em></strong> ein Passwort hat, tragen Sie es in der Datei <strong><em>[.env]</em></strong> der Anwendung in der Zeile <strong><em>[DATABASE_URL]</em></strong> ein: <strong><em>[mysql://root:myPassword@127.0.0.1:3306/dbrdvmedecins2...]</em></strong>;</li>
+<li><strong>Starten Sie die Anwendung</strong>:</li>
+</ul>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-8-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1"></a>php -S localhost:8081 -t public
+</code></pre></div></td></tr></table></div>
+<ul>
+<li><em>[PHP]</em> zeigt an:</li>
+</ul>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-9-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1"></a>[Sun Sep 27 18:40:12 2026] PHP 8.4.21 Development Server (http://localhost:8081) started
+</code></pre></div></td></tr></table></div>
+<p>Der Entwicklungsserver lauscht auf dem Port 8081 des Rechners (<strong><em>[localhost]</em></strong>). Jede empfangene Anfrage wird in der Konsole protokolliert, zusammen mit Meldungen von <em>[Symfony]</em> (die gewählte Route, die an die Datenbank gesendeten SQL-Befehle);</p>
+<ul>
+<li><strong>Öffnen Sie die Adresse</strong> <strong><em>[http://localhost:8081]</em></strong> in einem Browser:</li>
+</ul>
+<p><img src="images/10000000000003EC000003B4D911DA0C.png" width="605" height="571" style="width:16cm;height:15.108cm;" alt="Image" class="odt-zoomable" data-zoom-src="images/10000000000003EC000003B4D911DA0C.png" /></p>
+<ul>
+<li>Melden Sie sich mit einem der Demokonten an, dessen Passwort mit dem Benutzernamen übereinstimmt: <strong><em>[admin]</em></strong> (Administrator), <strong><em>[pelissier]</em></strong>, <strong><em>[tatou]</em></strong>, <strong><em>[dupont]</em></strong> (Ärzte), <strong><em>[martin]</em></strong>, <strong><em>[durand]</em></strong>, <strong><em>[bistrou]</em></strong>, <strong><em>[german]</em></strong> (Patienten). Außerdem müssen Sie die Zeichen aus dem Bild eingeben, in Groß- oder Kleinschreibung.</li>
+</ul>
+<p>Eine <em>[PHP]</em> -Anwendung liest die Datenbank beim Start nicht: Ein Verbindungsfehler tritt erst auf der ersten Seite auf, die die Datenbank abfragt, also beim Verbindungsaufbau. <em>[Symfony]</em> zeigt dann seine detaillierte Fehlerseite an und protokolliert den Fehler in der Serverkonsole. Lautet die Meldung <strong><em>[SQLSTATE[HY000] [2002] Connection refused]</em></strong>, wurde <em>[MySQL]</em> nicht gestartet; bei <strong><em>[[1045] Access denied for user &#x27;root&#x27;@&#x27;localhost&#x27;]</em></strong> ist das Passwort falsch; bei <strong><em>[[1049] Unknown database &#x27;dbrdvmedecins2&#x27;]</em></strong> wurde das SQL-Skript nicht ausgeführt; bei <strong><em>[could not find driver]</em></strong> ist die Erweiterung <strong><em>[pdo_mysql]</em></strong> von <em>[PHP]</em> nicht aktiviert. Zeigt die Seite <strong><em>[Failed opening required &#x27;.../vendor/autoload_runtime.php&#x27;]</em></strong> an, wurde <strong><em>[composer install]</em></strong> nicht ausgeführt; schlägt der Befehl <strong><em>[php -S]</em></strong> mit der Meldung <strong><em>[Failed to listen on localhost:8081 (reason: Address already in use)]</em></strong> fehl, wird Port 8081 bereits verwendet (zum Beispiel von einer anderen Version der Anwendung). Die Datei <strong><em>[README.md]</em></strong> der Anwendung beschreibt weitere Szenarien. Beenden Sie die Anwendung mit <strong><em>[Ctrl-C]</em></strong> im Terminal.</p>
+<p>Die Fallstudie am Ende des Dokuments zeigt, wie die Anwendung benutzt wird, und erläutert anschließend jede ihrer Dateien.</p>
+<h2 id="14-beispiele">1.4. <span style="color: #2e74b5">Beispiele</span></h2>
+<p>Die Beispiele liegen im Ordner <strong><em>[examples]</em></strong>, mit einem Unterordner pro Beispiel:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-10-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-10-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-10-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-10-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-10-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-10-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-10-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-10-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-10-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-10-10">10</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1"></a>examples/
+<a id="__codelineno-10-2" name="__codelineno-10-2"></a>├── 01-structure/
+<a id="__codelineno-10-3" name="__codelineno-10-3"></a>├── 02-routing/
+<a id="__codelineno-10-4" name="__codelineno-10-4"></a>├── ...
+<a id="__codelineno-10-5" name="__codelineno-10-5"></a>├── 28-layers/
+<a id="__codelineno-10-6" name="__codelineno-10-6"></a>├── common/
+<a id="__codelineno-10-7" name="__codelineno-10-7"></a>│   ├── bootstrap/
+<a id="__codelineno-10-8" name="__codelineno-10-8"></a>│   ├── BootstrapController.php
+<a id="__codelineno-10-9" name="__codelineno-10-9"></a>│   └── README.md
+<a id="__codelineno-10-10" name="__codelineno-10-10"></a>└── composer.json
+</code></pre></div></td></tr></table></div>
+<p>Jedes Beispiel ist eine kleine, eigenständig lauffähige Anwendung (<em>[Symfony]</em>). Alle Beispiele verwenden dieselben Bibliotheken, die in der Datei <strong><em>[examples/composer.json]</em></strong> beschrieben sind:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-11-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-11-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-11-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-11-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-11-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-11-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-11-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-11-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-11-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-11-10">10</a></span>
+<span class="normal"><a href="#__codelineno-11-11">11</a></span>
+<span class="normal"><a href="#__codelineno-11-12">12</a></span>
+<span class="normal"><a href="#__codelineno-11-13">13</a></span>
+<span class="normal"><a href="#__codelineno-11-14">14</a></span>
+<span class="normal"><a href="#__codelineno-11-15">15</a></span>
+<span class="normal"><a href="#__codelineno-11-16">16</a></span>
+<span class="normal"><a href="#__codelineno-11-17">17</a></span>
+<span class="normal"><a href="#__codelineno-11-18">18</a></span>
+<span class="normal"><a href="#__codelineno-11-19">19</a></span>
+<span class="normal"><a href="#__codelineno-11-20">20</a></span>
+<span class="normal"><a href="#__codelineno-11-21">21</a></span>
+<span class="normal"><a href="#__codelineno-11-22">22</a></span>
+<span class="normal"><a href="#__codelineno-11-23">23</a></span>
+<span class="normal"><a href="#__codelineno-11-24">24</a></span>
+<span class="normal"><a href="#__codelineno-11-25">25</a></span>
+<span class="normal"><a href="#__codelineno-11-26">26</a></span>
+<span class="normal"><a href="#__codelineno-11-27">27</a></span>
+<span class="normal"><a href="#__codelineno-11-28">28</a></span>
+<span class="normal"><a href="#__codelineno-11-29">29</a></span>
+<span class="normal"><a href="#__codelineno-11-30">30</a></span>
+<span class="normal"><a href="#__codelineno-11-31">31</a></span>
+<span class="normal"><a href="#__codelineno-11-32">32</a></span>
+<span class="normal"><a href="#__codelineno-11-33">33</a></span>
+<span class="normal"><a href="#__codelineno-11-34">34</a></span>
+<span class="normal"><a href="#__codelineno-11-35">35</a></span>
+<span class="normal"><a href="#__codelineno-11-36">36</a></span>
+<span class="normal"><a href="#__codelineno-11-37">37</a></span>
+<span class="normal"><a href="#__codelineno-11-38">38</a></span>
+<span class="normal"><a href="#__codelineno-11-39">39</a></span>
+<span class="normal"><a href="#__codelineno-11-40">40</a></span>
+<span class="normal"><a href="#__codelineno-11-41">41</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1"></a><span class="p">{</span>
+<a id="__codelineno-11-2" name="__codelineno-11-2"></a><span class="w">    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"course/symfony-examples"</span><span class="p">,</span>
+<a id="__codelineno-11-3" name="__codelineno-11-3"></a><span class="w">    </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"The 28 examples of the course [Step-by-step introduction to the Symfony web framework]: a single vendor folder, shared by all the examples"</span><span class="p">,</span>
+<a id="__codelineno-11-4" name="__codelineno-11-4"></a><span class="w">    </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"project"</span><span class="p">,</span>
+<a id="__codelineno-11-5" name="__codelineno-11-5"></a><span class="w">    </span><span class="nt">"license"</span><span class="p">:</span><span class="w"> </span><span class="s2">"MIT"</span><span class="p">,</span>
+<a id="__codelineno-11-6" name="__codelineno-11-6"></a><span class="w">    </span><span class="nt">"require"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-11-7" name="__codelineno-11-7"></a><span class="w">        </span><span class="nt">"php"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&gt;=8.4"</span><span class="p">,</span>
+<a id="__codelineno-11-8" name="__codelineno-11-8"></a><span class="w">        </span><span class="nt">"ext-intl"</span><span class="p">:</span><span class="w"> </span><span class="s2">"*"</span><span class="p">,</span>
+<a id="__codelineno-11-9" name="__codelineno-11-9"></a><span class="w">        </span><span class="nt">"ext-pdo_mysql"</span><span class="p">:</span><span class="w"> </span><span class="s2">"*"</span><span class="p">,</span>
+<a id="__codelineno-11-10" name="__codelineno-11-10"></a><span class="w">        </span><span class="nt">"doctrine/doctrine-bundle"</span><span class="p">:</span><span class="w"> </span><span class="s2">"^3.3"</span><span class="p">,</span>
+<a id="__codelineno-11-11" name="__codelineno-11-11"></a><span class="w">        </span><span class="nt">"doctrine/orm"</span><span class="p">:</span><span class="w"> </span><span class="s2">"^3.7"</span><span class="p">,</span>
+<a id="__codelineno-11-12" name="__codelineno-11-12"></a><span class="w">        </span><span class="nt">"firebase/php-jwt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"^7.2"</span><span class="p">,</span>
+<a id="__codelineno-11-13" name="__codelineno-11-13"></a><span class="w">        </span><span class="nt">"symfony/asset"</span><span class="p">:</span><span class="w"> </span><span class="s2">"^8.1"</span><span class="p">,</span>
+<a id="__codelineno-11-14" name="__codelineno-11-14"></a><span class="w">        </span><span class="nt">"symfony/console"</span><span class="p">:</span><span class="w"> </span><span class="s2">"^8.1"</span><span class="p">,</span>
+<a id="__codelineno-11-15" name="__codelineno-11-15"></a><span class="w">        </span><span class="nt">"symfony/dotenv"</span><span class="p">:</span><span class="w"> </span><span class="s2">"^8.1"</span><span class="p">,</span>
+<a id="__codelineno-11-16" name="__codelineno-11-16"></a><span class="w">        </span><span class="nt">"symfony/form"</span><span class="p">:</span><span class="w"> </span><span class="s2">"^8.1"</span><span class="p">,</span>
+<a id="__codelineno-11-17" name="__codelineno-11-17"></a><span class="w">        </span><span class="nt">"symfony/framework-bundle"</span><span class="p">:</span><span class="w"> </span><span class="s2">"^8.1"</span><span class="p">,</span>
+<a id="__codelineno-11-18" name="__codelineno-11-18"></a><span class="w">        </span><span class="nt">"symfony/intl"</span><span class="p">:</span><span class="w"> </span><span class="s2">"^8.1"</span><span class="p">,</span>
+<a id="__codelineno-11-19" name="__codelineno-11-19"></a><span class="w">        </span><span class="nt">"symfony/lock"</span><span class="p">:</span><span class="w"> </span><span class="s2">"^8.1"</span><span class="p">,</span>
+<a id="__codelineno-11-20" name="__codelineno-11-20"></a><span class="w">        </span><span class="nt">"symfony/rate-limiter"</span><span class="p">:</span><span class="w"> </span><span class="s2">"^8.1"</span><span class="p">,</span>
+<a id="__codelineno-11-21" name="__codelineno-11-21"></a><span class="w">        </span><span class="nt">"symfony/security-bundle"</span><span class="p">:</span><span class="w"> </span><span class="s2">"^8.1"</span><span class="p">,</span>
+<a id="__codelineno-11-22" name="__codelineno-11-22"></a><span class="w">        </span><span class="nt">"symfony/serializer"</span><span class="p">:</span><span class="w"> </span><span class="s2">"^8.1"</span><span class="p">,</span>
+<a id="__codelineno-11-23" name="__codelineno-11-23"></a><span class="w">        </span><span class="nt">"symfony/translation"</span><span class="p">:</span><span class="w"> </span><span class="s2">"^8.1"</span><span class="p">,</span>
+<a id="__codelineno-11-24" name="__codelineno-11-24"></a><span class="w">        </span><span class="nt">"symfony/twig-bundle"</span><span class="p">:</span><span class="w"> </span><span class="s2">"^8.1"</span><span class="p">,</span>
+<a id="__codelineno-11-25" name="__codelineno-11-25"></a><span class="w">        </span><span class="nt">"symfony/validator"</span><span class="p">:</span><span class="w"> </span><span class="s2">"^8.1"</span><span class="p">,</span>
+<a id="__codelineno-11-26" name="__codelineno-11-26"></a><span class="w">        </span><span class="nt">"symfony/yaml"</span><span class="p">:</span><span class="w"> </span><span class="s2">"^8.1"</span><span class="p">,</span>
+<a id="__codelineno-11-27" name="__codelineno-11-27"></a><span class="w">        </span><span class="nt">"twig/intl-extra"</span><span class="p">:</span><span class="w"> </span><span class="s2">"^3.30"</span><span class="p">,</span>
+<a id="__codelineno-11-28" name="__codelineno-11-28"></a><span class="w">        </span><span class="nt">"twig/twig"</span><span class="p">:</span><span class="w"> </span><span class="s2">"^3.30"</span>
+<a id="__codelineno-11-29" name="__codelineno-11-29"></a><span class="w">    </span><span class="p">},</span>
+<a id="__codelineno-11-30" name="__codelineno-11-30"></a><span class="w">    </span><span class="nt">"autoload"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-11-31" name="__codelineno-11-31"></a><span class="w">        </span><span class="nt">"psr-4"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-11-32" name="__codelineno-11-32"></a><span class="w">            </span><span class="nt">"Common\\"</span><span class="p">:</span><span class="w"> </span><span class="s2">"common/"</span>
+<a id="__codelineno-11-33" name="__codelineno-11-33"></a><span class="w">        </span><span class="p">}</span>
+<a id="__codelineno-11-34" name="__codelineno-11-34"></a><span class="w">    </span><span class="p">},</span>
+<a id="__codelineno-11-35" name="__codelineno-11-35"></a><span class="w">    </span><span class="nt">"config"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-11-36" name="__codelineno-11-36"></a><span class="w">        </span><span class="nt">"optimize-autoloader"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<a id="__codelineno-11-37" name="__codelineno-11-37"></a><span class="w">        </span><span class="nt">"sort-packages"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span>
+<a id="__codelineno-11-38" name="__codelineno-11-38"></a><span class="w">    </span><span class="p">},</span>
+<a id="__codelineno-11-39" name="__codelineno-11-39"></a><span class="w">    </span><span class="nt">"minimum-stability"</span><span class="p">:</span><span class="w"> </span><span class="s2">"stable"</span><span class="p">,</span>
+<a id="__codelineno-11-40" name="__codelineno-11-40"></a><span class="w">    </span><span class="nt">"prefer-stable"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span>
+<a id="__codelineno-11-41" name="__codelineno-11-41"></a><span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+<ul>
+<li>Zeilen 6–29: Was die Beispiele voraussetzen: <em>[PHP]</em> 8.4 oder höher, die Erweiterungen <strong><em>[intl]</em></strong> (sprachspezifische Formatierung von Zahlen und Datumsangaben, Beispiel 16) und <strong><em>[pdo_mysql]</em></strong> (Zugriff auf <em>[MySQL]</em>, Beispiel 28), gefolgt von den Bibliotheken in alphabetischer Reihenfolge: <em>[Doctrine]</em> (Beispiel 28), <em>[firebase/php-jwt]</em> (die JWT-Token, Beispiel 25) sowie die Komponenten und Bundles von <em>[Symfony]</em> , die die Beispiele verwenden. <strong><em>[^8.1]</em></strong> bedeutet „Version 8.1 oder eine neuere Version der Hauptversion 8“;</li>
+<li>Zeilen 30–34: Die Klassen im Namespace <strong><em>[Common]</em></strong> liegen im Ordner <strong><em>[common]</em></strong> (die PSR-4-Regel, gezeigt in Beispiel 01): Dies ist der gemeinsame Controller, der <em>[Bootstrap]</em>  ausliefert (Beispiel 15);</li>
+<li>die übrigen Zeilen konfigurieren das Verhalten von <em>[Composer]</em>: Der Class Loader wird optimiert, Bibliotheken werden nach Namen sortiert, und es werden nur stabile Versionen akzeptiert.</li>
+</ul>
+<p>Um die Beispiele auszuführen, installieren Sie zunächst ihre Bibliotheken – ein für alle Mal – in einem Terminalfenster, das im Ordner <strong><em>[examples]</em></strong> geöffnet ist:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-12-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1"></a>composer install
+</code></pre></div></td></tr></table></div>
+<p><em>[Composer]</em> erstellt den Ordner <strong><em>[examples/vendor]</em></strong>, der <strong>von allen</strong> 28 Beispielen gemeinsam genutzt wird, und die Datei <strong><em>[composer.lock]</em></strong>, die die genau installierten Versionen festhält (siehe Fallstudie). Der Ordner <strong><em>[common]</em></strong> enthält das CSS-Framework <em>[Bootstrap]</em> (<strong><em>[common/bootstrap]</em></strong>) – gemeinsam genutzt von den Beispielen, die ihre Seiten formatieren (ab Beispiel 15) – und den Controller, der es ausliefert (<strong><em>[common/BootstrapController.php]</em></strong>; siehe Beispiel 15).</p>
+<p>Fast alle Beispiele haben dieselbe Struktur – die einer üblichen <em>[Symfony]</em>-Anwendung, auf das Wesentliche reduziert. Zum Beispiel die aus Beispiel 13:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-13-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-13-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-13-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-13-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-13-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-13-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-13-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-13-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-13-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-13-10">10</a></span>
+<span class="normal"><a href="#__codelineno-13-11">11</a></span>
+<span class="normal"><a href="#__codelineno-13-12">12</a></span>
+<span class="normal"><a href="#__codelineno-13-13">13</a></span>
+<span class="normal"><a href="#__codelineno-13-14">14</a></span>
+<span class="normal"><a href="#__codelineno-13-15">15</a></span>
+<span class="normal"><a href="#__codelineno-13-16">16</a></span>
+<span class="normal"><a href="#__codelineno-13-17">17</a></span>
+<span class="normal"><a href="#__codelineno-13-18">18</a></span>
+<span class="normal"><a href="#__codelineno-13-19">19</a></span>
+<span class="normal"><a href="#__codelineno-13-20">20</a></span>
+<span class="normal"><a href="#__codelineno-13-21">21</a></span>
+<span class="normal"><a href="#__codelineno-13-22">22</a></span>
+<span class="normal"><a href="#__codelineno-13-23">23</a></span>
+<span class="normal"><a href="#__codelineno-13-24">24</a></span>
+<span class="normal"><a href="#__codelineno-13-25">25</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1"></a>13-first-view/
+<a id="__codelineno-13-2" name="__codelineno-13-2"></a>├── bin/
+<a id="__codelineno-13-3" name="__codelineno-13-3"></a>│   └── console
+<a id="__codelineno-13-4" name="__codelineno-13-4"></a>├── config/
+<a id="__codelineno-13-5" name="__codelineno-13-5"></a>│   ├── packages/
+<a id="__codelineno-13-6" name="__codelineno-13-6"></a>│   │   ├── framework.yaml
+<a id="__codelineno-13-7" name="__codelineno-13-7"></a>│   │   └── twig.yaml
+<a id="__codelineno-13-8" name="__codelineno-13-8"></a>│   ├── bundles.php
+<a id="__codelineno-13-9" name="__codelineno-13-9"></a>│   ├── routes.yaml
+<a id="__codelineno-13-10" name="__codelineno-13-10"></a>│   └── services.yaml
+<a id="__codelineno-13-11" name="__codelineno-13-11"></a>├── public/
+<a id="__codelineno-13-12" name="__codelineno-13-12"></a>│   └── index.php
+<a id="__codelineno-13-13" name="__codelineno-13-13"></a>├── src/
+<a id="__codelineno-13-14" name="__codelineno-13-14"></a>│   ├── Controller/
+<a id="__codelineno-13-15" name="__codelineno-13-15"></a>│   │   └── ViewsController.php
+<a id="__codelineno-13-16" name="__codelineno-13-16"></a>│   ├── Model/
+<a id="__codelineno-13-17" name="__codelineno-13-17"></a>│   │   └── PageModel.php
+<a id="__codelineno-13-18" name="__codelineno-13-18"></a>│   └── Kernel.php
+<a id="__codelineno-13-19" name="__codelineno-13-19"></a>├── templates/
+<a id="__codelineno-13-20" name="__codelineno-13-20"></a>│   └── views/
+<a id="__codelineno-13-21" name="__codelineno-13-21"></a>│       ├── unknown.html.twig
+<a id="__codelineno-13-22" name="__codelineno-13-22"></a>│       └── index.html.twig
+<a id="__codelineno-13-23" name="__codelineno-13-23"></a>├── var/
+<a id="__codelineno-13-24" name="__codelineno-13-24"></a>├── .env
+<a id="__codelineno-13-25" name="__codelineno-13-25"></a>└── composer.json
+</code></pre></div></td></tr></table></div>
+<ul>
+<li><strong><em>[public/index.php]</em></strong>: der Einstiegspunkt für alle Anfragen; <strong><em>[src/Kernel.php]</em></strong>: der Kern der Anwendung; <strong><em>[bin/console]</em></strong>: das Kommandozeilenwerkzeug von <em>[Symfony]</em> (Beispiel 01);</li>
+<li><strong><em>[config]</em></strong>: Konfiguration: die Bundles der Anwendung (<strong><em>[bundles.php]</em></strong>), die Konfiguration jedes einzelnen (Ordner <strong><em>[packages]</em></strong>), die Routen (<strong><em>[routes.yaml]</em></strong>, Beispiel 02), die Services (<strong><em>[services.yaml]</em></strong>, Beispiel 06);</li>
+<li><strong><em>[src]</em></strong>: die Klassen der Anwendung: Controller (<strong><em>[src/Controller]</em></strong>), Modelle, Services usw.;</li>
+<li><strong><em>[templates]</em></strong>: die <em>[Twig]</em> -Views (ab dem Kapitel über Views);</li>
+<li><strong><em>[.env]</em></strong>: für das Beispiel spezifische Einstellungen (Beispiel 01); <strong><em>[var]</em></strong>: Dateien, die <em>[Symfony]</em> selbst schreibt (der Cache, die Session).</li>
+</ul>
+<p>Um ein Beispiel auszuführen, öffnen Sie ein Terminal in seinem Ordner (in <em>[Visual Studio Code]</em>: Rechtsklick auf den Beispielordner, dann „Open in Integrated Terminal“ wählen) und geben ein:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-14-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1"></a>php -S localhost:8000 -t public
+</code></pre></div></td></tr></table></div>
+<p>Alle Beispiele lauschen auf Port 8000: Sie können nur eines gleichzeitig ausführen (oder Sie müssen den Port ändern: <strong><em>[php -S localhost:8001 -t public]</em></strong>). Beenden Sie den Server mit <strong><em>[Ctrl-C]</em></strong> im Terminal. Es ist nicht nötig, den Server nach der Änderung einer <em>[PHP]</em>-Datei, einer View oder der Konfiguration neu zu starten: Die Änderungen werden bei der nächsten Anfrage wirksam (Beispiel 01).</p>
+<p>Wenn Sie den Ordner <strong><em>[examples]</em></strong> in <em>[Visual Studio Code]</em> öffnen, analysiert die Erweiterung <em>[PHP Intelephense]</em> alle Dateien, auch die von <em>[Symfony]</em> im Ordner <strong><em>[vendor]</em></strong>: In jeder Datei stehen Ihnen Codevervollständigung, Navigation zur Definition einer Klasse oder Methode (Taste <strong><em>[F12]</em></strong>) und Fehlermeldungen zur Verfügung. Da alle Beispiele ihre Klassen im Namespace <strong><em>[App]</em></strong> haben, kann die Erweiterung „doppelte“ Klassen melden: Das hat keine Auswirkung auf die Ausführung, da jedes Beispiel unabhängig läuft. Um diese Warnungen zu vermeiden, öffnen Sie einfach den Ordner des Beispiels selbst.</p>
+<h2 id="15-inhalt-des-dokuments">1.5. <span style="color: #2e74b5">Inhalt des Dokuments</span></h2>
+<p>Das Dokument ist wie folgt aufgebaut:</p>
+<table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top; text-align: left;"><div style="margin:0 0 0.5em 0">Actions, Routing, Antworten</div></td><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top; text-align: left;"><div style="margin:0 0 0.5em 0">Von der Anfrage zur Action: Routen, Controller, Antworten, Weiterleitungen, gemeinsame Services</div></td><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top; text-align: left;"><div style="margin:0 0 0.5em 0">01 bis 06</div></td></tr><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top; text-align: left;"><div style="margin:0 0 0.5em 0">Das Action-Modell</div></td><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top; text-align: left;"><div style="margin:0 0 0.5em 0">Anfrageparameter: Binding, Konvertierung, Validierung, POST-Anfragen</div></td><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top; text-align: left;"><div style="margin:0 0 0.5em 0">07 bis 12</div></td></tr><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top; text-align: left;"><div style="margin:0 0 0.5em 0">Die View und ihr Template</div></td><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top; text-align: left;"><div style="margin:0 0 0.5em 0"><i>[Twig]</i>, Template, Makros, Formulare in <i>[Symfony]</i>, Validierung, PRG, CSRF-Schutz</div></td><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top; text-align: left;"><div style="margin:0 0 0.5em 0">13 bis 21</div></td></tr><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top; text-align: left;"><div style="margin:0 0 0.5em 0">Internationalisierung</div></td><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top; text-align: left;"><div style="margin:0 0 0.5em 0">Eine Anwendung auf Französisch und Englisch</div></td><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top; text-align: left;"><div style="margin:0 0 0.5em 0">22</div></td></tr><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top; text-align: left;"><div style="margin:0 0 0.5em 0">Datenbereiche</div></td><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top; text-align: left;"><div style="margin:0 0 0.5em 0">Request, Session, Cache, Cookies</div></td><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top; text-align: left;"><div style="margin:0 0 0.5em 0">23</div></td></tr><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top; text-align: left;"><div style="margin:0 0 0.5em 0">Der Lebenszyklus einer Anfrage</div></td><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top; text-align: left;"><div style="margin:0 0 0.5em 0">Kernel-Ereignisse, Argument-Resolver, Ausnahmebehandlung</div></td><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top; text-align: left;"><div style="margin:0 0 0.5em 0">24</div></td></tr><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top; text-align: left;"><div style="margin:0 0 0.5em 0">Authentifizierung und Autorisierung</div></td><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top; text-align: left;"><div style="margin:0 0 0.5em 0">Firewall, JWT-Authenticator in einem Cookie, Rollen, CAPTCHA, Versuchsbegrenzung</div></td><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top; text-align: left;"><div style="margin:0 0 0.5em 0">25–27</div></td></tr><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top; text-align: left;"><div style="margin:0 0 0.5em 0">Geschichtete Architektur und Datenzugriff</div></td><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top; text-align: left;"><div style="margin:0 0 0.5em 0">Web / Geschäft / DAO mit <i>[Doctrine] </i>und <i>[MySQL]</i></div></td><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top; text-align: left;"><div style="margin:0 0 0.5em 0">28</div></td></tr><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top; text-align: left;"><div style="margin:0 0 0.5em 0">Fallstudie</div></td><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top; text-align: left;"><div style="margin:0 0 0.5em 0">Die Anwendung RdvMedecins, Datei für Datei erläutert</div></td><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top; text-align: left;"><div style="margin:0 0 0.5em 0">-</div></td></tr></table>
+
+<p>Jedes Beispiel führt nur wenige neue Konzepte ein, und die Kapitel bauen aufeinander auf: Am besten lesen Sie sie der Reihe nach. Die Fallstudie wiederum greift auf <strong>alle</strong> Konzepte der vorangehenden Kapitel zurück: Wo es sinnvoll ist, verweist ihr Kommentar auf das Beispiel, in dem das Konzept eingeführt wurde. Die Anhänge beschreiben die Installation der Werkzeuge: <em>[PHP]</em>, <em>[Composer]</em>, <em>[Visual Studio Code]</em> und seiner Erweiterungen, <em>[MySQL]</em> zusammen mit <em>[Laragon]</em>, <em>[curl]</em> und des Werkzeugs <strong><em>[symfony]</em></strong>.</p>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner">
+
+      <div>
+        <a href="https://stahe.github.io" target="_blank">
+          https://stahe.github.io
+        </a>
+        <br>
+        Dieses Tutorial, geschrieben von der KI <strong>Claude</strong> von Anthropic im Auftrag von <strong>Serge Tahé</strong>, wird der Öffentlichkeit unter den Bedingungen der Lizenz
+        <em>Creative Commons Namensnennung – Nicht kommerziell –
+        Weitergabe unter gleichen Bedingungen 3.0 Unported</em> zur Verfügung gestellt.
+
+      </div>
+
+    </div>
+  </div>
+
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": ".", "features": ["navigation.sections", "navigation.indexes", "navigation.expand", "toc.integrate", "navigation.top"], "search": "assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+        <script src="javascripts/focus.js"></script>
+      
+    
+  </body>
+</html>
